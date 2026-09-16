@@ -1,81 +1,78 @@
 import { getShopifyProducts } from "@/lib/shopify";
+import Image from "next/image";
 import Hero from "@/components/Hero";
-import ProductCard from "@/components/ProductCard";
+import ProductGrid from "@/components/ProductGrid";
+import Header from "@/components/Header";
 
 export default async function Home() {
   const products = await getShopifyProducts();
 
   return (
-    <div className="flex flex-col min-h-screen bg-white font-sans">
-      {/* Marquee Announcement Bar */}
-      <div className="bg-[#800020] text-white text-sm py-2 overflow-hidden flex whitespace-nowrap justify-center">
-        <span className="inline-block px-4">
-          🦋 Let Your Style Take Flight 🦋 Unfold Your True Colors 🦋 Ethnic Wear That Moves With You 🦋
-        </span>
-      </div>
+    <div className="flex flex-col min-h-screen bg-[#FDFBF7] font-sans text-[#27272A] relative">
+      {/* Absolute Header Overlay */}
+      <div className="absolute top-0 left-0 w-full z-50 pointer-events-none">
+        <div className="pointer-events-auto">
+          {/* Marquee Announcement Bar */}
+          <div className="bg-[#631828] text-[#FDFBF7] text-xs tracking-widest uppercase py-3 overflow-hidden flex whitespace-nowrap justify-center shadow-md">
+            <span className="inline-block px-4">
+              🦋 Let Your Style Take Flight • Unfold Your True Colors • Ethnic Wear That Moves With You 🦋
+            </span>
+          </div>
 
-      {/* Navbar */}
-      <header className="flex justify-between items-center py-6 px-4 md:px-8 max-w-7xl mx-auto w-full">
-        <div className="text-2xl font-serif font-bold text-gray-900">Butterflies Trends</div>
-        <nav className="hidden md:flex gap-8 text-gray-600 font-medium">
-          <a href="#" className="hover:text-[#800020] transition">Home</a>
-          <a href="#products" className="hover:text-[#800020] transition">Collections</a>
-          <a href="#" className="hover:text-[#800020] transition">About</a>
-          <a href="#" className="hover:text-[#800020] transition">Contact</a>
-        </nav>
-        <div className="text-gray-900 cursor-pointer hover:text-[#800020] transition">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-          </svg>
+          {/* Navbar with Cart Drawer Toggle */}
+          <Header />
         </div>
-      </header>
+      </div>
 
       <main className="flex-grow">
         <Hero />
 
         {/* Shop by Category */}
-        <section className="py-20 px-4 md:px-8 max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-serif text-center mb-16 text-gray-900">Shop by Category</h2>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-12 sm:gap-20">
+        <section className="py-32 px-4 md:px-8 max-w-5xl mx-auto bg-[#EAE2D6] rounded-3xl mt-12 mb-12 shadow-sm">
+          <h2 className="text-3xl md:text-5xl font-serif text-center mb-24 text-[#631828]">Shop by Category</h2>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-16 sm:gap-32">
             <div className="flex flex-col items-center group cursor-pointer text-center">
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gray-100 mb-6 shadow-md hover:shadow-lg transition"></div>
-              <h3 className="text-xl md:text-2xl font-serif text-gray-900 group-hover:text-[#800020] transition">Straight Cut Kurtis</h3>
+              <div className="w-56 h-72 md:w-72 md:h-96 bg-[#FDFBF7] mb-8 border border-[#D5C8B8] transition-all duration-700 ease-out group-hover:border-[#631828] shadow-sm overflow-hidden relative">
+                <Image src="/straight-cut.jpg" alt="Straight Cut Kurtis" fill className="object-cover w-full h-full hover:scale-105 transition-transform duration-500" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-serif text-[#27272A] group-hover:text-[#631828] transition-colors duration-500">Straight Cut Kurtis</h3>
             </div>
             <div className="flex flex-col items-center group cursor-pointer text-center">
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gray-100 mb-6 shadow-md hover:shadow-lg transition"></div>
-              <h3 className="text-xl md:text-2xl font-serif text-gray-900 group-hover:text-[#800020] transition">A-Line Umbrella Kurtis</h3>
+              <div className="w-56 h-72 md:w-72 md:h-96 bg-[#FDFBF7] mb-8 border border-[#D5C8B8] transition-all duration-700 ease-out group-hover:border-[#631828] shadow-sm overflow-hidden relative">
+                <Image src="/a-line.jpg" alt="A-Line Umbrella Kurtis" fill className="object-cover w-full h-full hover:scale-105 transition-transform duration-500" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-serif text-[#27272A] group-hover:text-[#631828] transition-colors duration-500">A-Line Umbrella Kurtis</h3>
             </div>
           </div>
         </section>
 
         {/* Featured Products Grid */}
-        <section id="products" className="py-20 px-4 md:px-8 bg-gray-50 border-t border-gray-200">
+        <section id="products" className="py-32 px-4 md:px-8 border-t border-[#EAE2D6]">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-serif text-center mb-16 text-gray-900">Featured Products</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {products.map(({ node }: any) => (
-                <ProductCard key={node.id} node={node} />
-              ))}
-            </div>
+            <h2 className="text-3xl md:text-5xl font-serif text-center mb-24 text-[#631828]">Featured Collection</h2>
+            <ProductGrid products={products} />
           </div>
         </section>
 
         {/* Trust Signals */}
-        <section className="py-20 bg-white">
+        <section className="py-32 bg-[#F4E8E8]">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-serif text-center mb-16 text-gray-900">Shop Online Easily</h2>
-            <div className="flex flex-col md:flex-row justify-center items-center gap-12 md:gap-24 text-center">
+            <h2 className="text-2xl md:text-4xl font-serif text-center mb-24 text-[#631828]">The Experience</h2>
+            <div className="flex flex-col md:flex-row justify-center items-start gap-16 md:gap-32 text-center">
               <div className="flex flex-col items-center max-w-xs">
-                <div className="w-16 h-16 bg-[#800020] text-white rounded-full flex items-center justify-center text-2xl font-serif font-bold mb-6">1</div>
-                <h3 className="text-xl font-medium text-gray-900 mb-3">Browse</h3>
+                <div className="w-12 h-12 border border-[#631828] text-[#631828] rounded-full flex items-center justify-center text-xl font-serif mb-8">1</div>
+                <h3 className="text-lg font-serif text-[#27272A] mb-4">Discover</h3>
+                <p className="text-[#27272A]/70 text-sm leading-relaxed">Explore our curated collection of luxury ethnic wear.</p>
               </div>
               <div className="flex flex-col items-center max-w-xs">
-                <div className="w-16 h-16 bg-[#800020] text-white rounded-full flex items-center justify-center text-2xl font-serif font-bold mb-6">2</div>
-                <h3 className="text-xl font-medium text-gray-900 mb-3">Add to Cart</h3>
+                <div className="w-12 h-12 border border-[#631828] text-[#631828] rounded-full flex items-center justify-center text-xl font-serif mb-8">2</div>
+                <h3 className="text-lg font-serif text-[#27272A] mb-4">Select</h3>
+                <p className="text-[#27272A]/70 text-sm leading-relaxed">Add pieces to your collection with a seamless experience.</p>
               </div>
               <div className="flex flex-col items-center max-w-xs">
-                <div className="w-16 h-16 bg-[#800020] text-white rounded-full flex items-center justify-center text-2xl font-serif font-bold mb-6">3</div>
-                <h3 className="text-xl font-medium text-gray-900 mb-3">Receive Confirmation</h3>
+                <div className="w-12 h-12 border border-[#631828] text-[#631828] rounded-full flex items-center justify-center text-xl font-serif mb-8">3</div>
+                <h3 className="text-lg font-serif text-[#27272A] mb-4">Receive</h3>
+                <p className="text-[#27272A]/70 text-sm leading-relaxed">Anticipate the arrival of your premium garments.</p>
               </div>
             </div>
           </div>
@@ -83,16 +80,20 @@ export default async function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#800020] text-white py-12 px-4">
+      <footer className="bg-[#631828] py-20 px-4 text-[#FDFBF7]">
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
-          <h3 className="text-3xl font-serif mb-4">Butterflies Trends</h3>
-          <p className="text-gray-200 mb-8 max-w-sm">Freedom & Flight. Ethnic wear that moves with you.</p>
-          <div className="flex gap-6 mb-8">
-            <a href="#" className="hover:text-gray-300">Home</a>
-            <a href="#products" className="hover:text-gray-300">Shop</a>
-            <a href="#" className="hover:text-gray-300">Contact</a>
+          <h3 className="text-4xl font-serif mb-6 tracking-wide text-[#FDFBF7]">Butterflies Trends</h3>
+          <p className="text-[#FDFBF7] mb-12 max-w-md text-sm leading-relaxed font-sans tracking-wide">
+            Freedom & Flight. Ethnic wear that moves with you.
+          </p>
+          <div className="flex gap-12 mb-12 text-[#FDFBF7] font-sans tracking-widest text-xs uppercase">
+            <a href="#" className="hover:text-white transition-colors duration-300">Home</a>
+            <a href="#products" className="hover:text-white transition-colors duration-300">Shop</a>
+            <a href="#" className="hover:text-white transition-colors duration-300">Contact</a>
           </div>
-          <p className="text-sm text-gray-300">© {new Date().getFullYear()} Butterflies Trends. All rights reserved.</p>
+          <p className="text-xs text-[#FDFBF7] uppercase tracking-widest">
+            © {new Date().getFullYear()} Butterflies Trends. All rights reserved.
+          </p>
         </div>
       </footer>
     </div>
