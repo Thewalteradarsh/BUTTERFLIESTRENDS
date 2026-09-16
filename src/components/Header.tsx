@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "top-0 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-neutral-200 py-4" : "top-10 bg-transparent py-6"}`}>
+      <header className={`fixed w-full z-50 transition-all duration-300 flex items-center ${isScrolled ? "top-0 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-neutral-200 py-4" : "top-10 bg-transparent py-4"}`}>
         <div className="flex justify-between items-center px-4 md:px-8 max-w-7xl mx-auto w-full">
         <Link href="/" className="flex items-center">
           <Image 
@@ -27,7 +27,7 @@ export default function Header() {
             alt="Butterflies Trends Logo" 
             width={160} 
             height={50} 
-            className="object-contain h-8 w-auto md:h-12" 
+            className="object-contain object-left h-10 w-auto md:h-12" 
             priority
           />
         </Link>
