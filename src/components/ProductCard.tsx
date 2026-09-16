@@ -33,7 +33,7 @@ export default function ProductCard({ node }: { node: any }) {
 
   return (
     <div className="flex flex-col group cursor-pointer w-full">
-      <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#EAE2D6] mb-6">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#EAE2D6] mb-3 md:mb-6">
         <motion.div 
           className="w-full h-full"
           whileHover={{ scale: 1.03 }}
@@ -47,8 +47,8 @@ export default function ProductCard({ node }: { node: any }) {
           />
         </motion.div>
         
-        {/* Quick Add Button overlay */}
-        <div className="absolute bottom-0 left-0 w-full p-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out z-10">
+        {/* Quick Add Button overlay (Desktop Only) */}
+        <div className="hidden md:block absolute bottom-0 left-0 w-full p-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out z-10">
           <button 
             onClick={(e) => {
               e.stopPropagation();
@@ -63,9 +63,22 @@ export default function ProductCard({ node }: { node: any }) {
       </div>
       
       <div className="flex flex-col items-center text-center">
-        <p className="text-xs tracking-widest text-[#27272A]/70 uppercase mb-2">New Arrival</p>
-        <h3 className="text-lg font-serif text-[#27272A] mb-2 line-clamp-1" title={node.title}>{node.title}</h3>
-        <p className="text-[#27272A] font-serif text-md">₹{Number(price).toLocaleString('en-IN')}</p>
+        <p className="text-[10px] md:text-xs tracking-widest text-[#27272A]/70 uppercase mb-1 md:mb-2">New Arrival</p>
+        <h3 className="text-xs md:text-sm lg:text-lg font-serif text-[#27272A] mb-1 md:mb-2 line-clamp-1" title={node.title}>{node.title}</h3>
+        <p className="text-[#27272A] font-serif text-sm font-semibold md:text-base md:font-normal">₹{Number(price).toLocaleString('en-IN')}</p>
+        
+        {/* Mobile Add to Cart Button (Mobile Only) */}
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleAddToCart();
+          }}
+          disabled={loading}
+          className={`md:hidden w-full py-2 mt-2 text-[10px] sm:text-xs font-medium tracking-wide uppercase bg-[#631828] text-[#FDFBF7] hover:bg-[#4A111D] transition-colors ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+        >
+          {loading ? "Adding..." : "Add to Cart"}
+        </button>
       </div>
     </div>
   );

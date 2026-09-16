@@ -30,18 +30,18 @@ export default async function Home() {
         {/* Shop by Category */}
         <section className="py-32 px-4 md:px-8 max-w-5xl mx-auto bg-[#EAE2D6] rounded-3xl mt-12 mb-12 shadow-sm">
           <h2 className="text-3xl md:text-5xl font-serif text-center mb-24 text-[#631828]">Shop by Category</h2>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-16 sm:gap-32">
-            <div className="flex flex-col items-center group cursor-pointer text-center">
-              <div className="w-56 h-72 md:w-72 md:h-96 bg-[#FDFBF7] mb-8 border border-[#D5C8B8] transition-all duration-700 ease-out group-hover:border-[#631828] shadow-sm overflow-hidden relative">
-                <Image src="/straight-cut.jpg" alt="Straight Cut Kurtis" fill className="object-cover w-full h-full hover:scale-105 transition-transform duration-500" />
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 px-4 pb-4 scrollbar-hide md:overflow-visible md:snap-none md:justify-center md:gap-32">
+            <div className="flex flex-col items-center group cursor-pointer text-center shrink-0 snap-center">
+              <div className="w-[250px] aspect-[4/5] md:w-72 md:h-96 bg-[#FDFBF7] mb-6 md:mb-8 border border-[#D5C8B8] transition-all duration-700 ease-out group-hover:border-[#631828] shadow-sm overflow-hidden relative">
+                <Image src="/straight-cut.jpg.jpg" alt="Straight Cut Kurtis" fill className="object-cover w-full h-full hover:scale-105 transition-transform duration-500" />
               </div>
-              <h3 className="text-xl md:text-2xl font-serif text-[#27272A] group-hover:text-[#631828] transition-colors duration-500">Straight Cut Kurtis</h3>
+              <h3 className="text-lg md:text-2xl font-serif text-[#27272A] group-hover:text-[#631828] transition-colors duration-500">Straight Cut Kurtis</h3>
             </div>
-            <div className="flex flex-col items-center group cursor-pointer text-center">
-              <div className="w-56 h-72 md:w-72 md:h-96 bg-[#FDFBF7] mb-8 border border-[#D5C8B8] transition-all duration-700 ease-out group-hover:border-[#631828] shadow-sm overflow-hidden relative">
-                <Image src="/a-line.jpg" alt="A-Line Umbrella Kurtis" fill className="object-cover w-full h-full hover:scale-105 transition-transform duration-500" />
+            <div className="flex flex-col items-center group cursor-pointer text-center shrink-0 snap-center">
+              <div className="w-[250px] aspect-[4/5] md:w-72 md:h-96 bg-[#FDFBF7] mb-6 md:mb-8 border border-[#D5C8B8] transition-all duration-700 ease-out group-hover:border-[#631828] shadow-sm overflow-hidden relative">
+                <Image src="/a-line.jpg.jpg" alt="A-Line Umbrella Kurtis" fill className="object-cover w-full h-full hover:scale-105 transition-transform duration-500" />
               </div>
-              <h3 className="text-xl md:text-2xl font-serif text-[#27272A] group-hover:text-[#631828] transition-colors duration-500">A-Line Umbrella Kurtis</h3>
+              <h3 className="text-lg md:text-2xl font-serif text-[#27272A] group-hover:text-[#631828] transition-colors duration-500">A-Line Umbrella Kurtis</h3>
             </div>
           </div>
         </section>
