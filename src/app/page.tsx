@@ -12,13 +12,6 @@ export default async function Home() {
       {/* Absolute Header Overlay */}
       <div className="absolute top-0 left-0 w-full z-50 pointer-events-none">
         <div className="pointer-events-auto">
-          {/* Marquee Announcement Bar */}
-          <div className="bg-[#BA2461] text-[#FDFBF7] text-xs tracking-widest uppercase py-3 overflow-hidden flex whitespace-nowrap justify-center shadow-md">
-            <span className="inline-block px-4">
-              🦋 Let Your Style Take Flight • Unfold Your True Colors • Ethnic Wear That Moves With You 🦋
-            </span>
-          </div>
-
           {/* Navbar with Cart Drawer Toggle */}
           <Header />
         </div>
