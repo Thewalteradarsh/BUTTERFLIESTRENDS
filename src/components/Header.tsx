@@ -35,14 +35,14 @@ export default function Header() {
             />
           </Link>
           <nav className="flex gap-12 text-[#27272A] font-sans tracking-widest text-xs uppercase">
-            <a href="#" className="hover:text-[#631828] transition-colors duration-300">Home</a>
-            <a href="#products" className="hover:text-[#631828] transition-colors duration-300">Collections</a>
-            <a href="#" className="hover:text-[#631828] transition-colors duration-300">About</a>
-            <a href="#" className="hover:text-[#631828] transition-colors duration-300">Contact</a>
+            <a href="#" className="hover:text-[#BA2461] transition-colors duration-300">Home</a>
+            <a href="#products" className="hover:text-[#BA2461] transition-colors duration-300">Collections</a>
+            <a href="#" className="hover:text-[#BA2461] transition-colors duration-300">About</a>
+            <a href="#" className="hover:text-[#BA2461] transition-colors duration-300">Contact</a>
           </nav>
           <button 
             onClick={() => setIsCartOpen(true)}
-            className="text-[#27272A] hover:text-[#631828] transition-colors duration-300"
+            className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300"
             aria-label="Open cart"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -55,7 +55,7 @@ export default function Header() {
         <div className="grid md:hidden grid-cols-3 items-center px-4 w-full">
           {/* Hamburger Menu (Left) */}
           <button 
-            className="text-[#27272A] hover:text-[#631828] transition-colors justify-self-start"
+            className="text-[#27272A] hover:text-[#BA2461] transition-colors justify-self-start"
             aria-label="Open menu"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -81,7 +81,7 @@ export default function Header() {
           {/* Cart Icon (Right) */}
           <button 
             onClick={() => setIsCartOpen(true)}
-            className="text-[#27272A] hover:text-[#631828] transition-colors duration-300 justify-self-end"
+            className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300 justify-self-end"
             aria-label="Open cart"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

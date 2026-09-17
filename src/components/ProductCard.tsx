@@ -55,7 +55,7 @@ export default function ProductCard({ node }: { node: any }) {
               handleAddToCart();
             }}
             disabled={loading}
-            className={`w-full py-3 bg-[#631828] text-[#FDFBF7] hover:bg-[#4A111D] transition-colors duration-500 font-sans tracking-widest text-xs uppercase flex justify-center items-center shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+            className={`w-full py-3 bg-[#BA2461] text-[#FDFBF7] hover:bg-[#951C4D] transition-colors duration-500 font-sans tracking-widest text-xs uppercase flex justify-center items-center shadow-lg ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
             {loading ? "Adding..." : "Quick Add"}
           </button>
@@ -75,7 +75,7 @@ export default function ProductCard({ node }: { node: any }) {
             handleAddToCart();
           }}
           disabled={loading}
-          className={`md:hidden w-full py-2 mt-2 text-[10px] sm:text-xs font-medium tracking-wide uppercase bg-[#631828] text-[#FDFBF7] hover:bg-[#4A111D] transition-colors ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+          className={`md:hidden w-full py-2 mt-2 text-[10px] sm:text-xs font-medium tracking-wide uppercase bg-[#BA2461] text-[#FDFBF7] hover:bg-[#951C4D] transition-colors ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
         >
           {loading ? "Adding..." : "Add to Cart"}
         </button>

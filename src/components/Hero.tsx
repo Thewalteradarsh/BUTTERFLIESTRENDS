@@ -35,7 +35,7 @@ export default function Hero() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-7xl lg:text-8xl font-serif text-[#631828] mb-8 leading-tight drop-shadow-sm"
+                className="text-7xl lg:text-8xl font-serif text-[#BA2461] mb-8 leading-tight drop-shadow-sm"
               >
                 Let Your Style <br /> Take Flight
               </motion.h1>
@@ -54,7 +54,7 @@ export default function Hero() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="inline-flex items-center justify-center px-10 py-4 bg-[#631828] text-[#FDFBF7] hover:bg-[#4A111D] font-sans tracking-widest text-xs uppercase transition-colors duration-300 mb-16 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center px-10 py-4 bg-[#BA2461] text-[#FDFBF7] hover:bg-[#951C4D] font-sans tracking-widest text-xs uppercase transition-colors duration-300 mb-16 shadow-lg hover:shadow-xl"
               >
                 Explore Collection
               </motion.a>
@@ -65,7 +65,7 @@ export default function Hero() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="flex flex-row gap-8 w-full border-t border-[#631828]/20 pt-8"
+                className="flex flex-row gap-8 w-full border-t border-[#BA2461]/20 pt-8"
               >
                 <div className="flex items-center text-[#27272A]">
                   <span className="text-xs uppercase tracking-widest font-sans drop-shadow-sm">Trendy Collections</span>
@@ -88,7 +88,7 @@ export default function Hero() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.2 }}
-                className="text-4xl font-serif text-[#631828] mb-4 leading-tight drop-shadow-sm"
+                className="text-4xl font-serif text-[#BA2461] mb-4 leading-tight drop-shadow-sm"
               >
                 Let Your Style <br /> Take Flight
               </motion.h1>
@@ -107,7 +107,7 @@ export default function Hero() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.4 }}
-                className="inline-flex items-center justify-center w-full py-4 bg-[#631828] text-[#FDFBF7] hover:bg-[#4A111D] font-sans tracking-widest text-xs uppercase transition-colors duration-300 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center w-full py-4 bg-[#BA2461] text-[#FDFBF7] hover:bg-[#951C4D] font-sans tracking-widest text-xs uppercase transition-colors duration-300 shadow-lg hover:shadow-xl"
               >
                 Explore Collection
               </motion.a>
