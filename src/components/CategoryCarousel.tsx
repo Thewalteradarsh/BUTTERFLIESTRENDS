@@ -1,15 +1,15 @@
 import Image from "next/image";
 
 const categories = [
-  "Sleeveless Umbrella Kurtis",
-  "Straight cut Kurtis",
-  "A line Umbrella Kurtis",
-  "Short/Jeans Top",
-  "Gown/ Dresses",
-  "Co-ord Sets",
-  "Narrow Pants",
-  "Skirts",
-  "Accessories"
+  { name: "Sleeveless Umbrella Kurtis", image: "/category-1.jpg" },
+  { name: "Straight cut Kurtis", image: "/straight-cut.jpg.jpg" },
+  { name: "A line Umbrella Kurtis", image: "/a-line.jpg.jpg" },
+  { name: "Short/Jeans Top", image: "/category-4.jpg" },
+  { name: "Gown/ Dresses", image: "/category-5.jpg" },
+  { name: "Co-ord Sets", image: "/category-6.jpg" },
+  { name: "Narrow Pants", image: "/category-7.jpg" },
+  { name: "Skirts", image: "/category-8.jpg" },
+  { name: "Accessories", image: "/category-9.jpg" }
 ];
 
 export default function CategoryCarousel() {
@@ -26,16 +26,15 @@ export default function CategoryCarousel() {
               <div className="absolute inset-0 bg-[#FDFBF7] flex items-center justify-center p-4">
                 <span className="text-[#BA2461]/30 font-serif text-2xl font-bold">{index + 1}</span>
               </div>
-              {/* Uncomment and update src when images are available */}
-              {/* <Image 
-                src={`/category-${index + 1}.jpg`} 
-                alt={category} 
+              <Image 
+                src={category.image} 
+                alt={category.name} 
                 fill 
                 className="object-cover w-full h-full hover:scale-105 transition-transform duration-500 z-10" 
-              /> */}
+              />
             </div>
             <h3 className="text-base md:text-lg font-serif text-[#27272A] group-hover:text-[#BA2461] transition-colors duration-500 max-w-[200px]">
-              {category}
+              {category.name}
             </h3>
           </div>
         ))}

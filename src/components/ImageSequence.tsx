@@ -20,7 +20,7 @@ export default function ImageSequence() {
       const img = new Image();
       // Pad with 3 digits e.g., 001
       const paddedIndex = i.toString().padStart(3, "0");
-      img.src = `/Cotton_fabric_unfolding_and_ripp__20260916170032_frames/frame_${paddedIndex}.jpg`;
+      img.src = `/Cotton_fabric_unfolding_and_ripp_20260916170032_frames/frame_${paddedIndex}.jpg`;
       img.onload = () => {
         loadedCount++;
         if (loadedCount === frameCount) {
