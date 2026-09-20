@@ -20,6 +20,9 @@ export default function Header() {
 
   return (
     <>
+      <div className={`fixed top-0 w-full z-[60] bg-[#BA2461] text-[#FDFBF7] text-[10px] sm:text-xs font-sans tracking-widest text-center py-2.5 px-2 transition-transform duration-300 ${isScrolled ? "-translate-y-full" : "translate-y-0"}`}>
+        Free Delivery on Prepaid Orders | COD Available | Easy Replacement | Pan-India Shipping
+      </div>
       <header className={`fixed w-full z-50 transition-all duration-300 flex items-center ${isScrolled ? "top-0 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-neutral-200 py-4" : "top-10 bg-transparent py-4"}`}>
         
         {/* Desktop Layout */}
