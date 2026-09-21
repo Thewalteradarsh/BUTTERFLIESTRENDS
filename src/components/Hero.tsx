@@ -1,19 +1,46 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef, useEffect } from 'react';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 
 export default function Hero() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    for (let i = 1; i <= 66; i++) {
+      const img = new Image();
+      img.src = `/hero-fabric_frames/frame_${String(i).padStart(3, '0')}.jpg`;
+      imagesRef.current.push(img);
+    }
+
+    imagesRef.current[0].onload = () => {
+      const ctx = canvasRef.current?.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(imagesRef.current[0], 0, 0, 1920, 1080);
+      }
+    };
+  }, []);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const frameIndex = Math.min(65, Math.floor(latest * 66));
+    const ctx = canvasRef.current?.getContext('2d');
+    const img = imagesRef.current[frameIndex];
+
+    if (ctx && img && img.complete) {
+      ctx.drawImage(img, 0, 0, 1920, 1080);
+    }
+  });
   return (
     <section className="relative w-full h-[100dvh] md:h-screen bg-[#FDFBF7] border-b border-[#EAE2D6] overflow-hidden">
-      {/* Video Background */}
-      <video 
-        src="/hero-fabric.mp4" 
-        autoPlay 
-        loop 
-        muted 
-        playsInline 
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      ></video>
+      {/* Scroll-Driven Canvas Background */}
+      <canvas 
+        ref={canvasRef} 
+        width={1920} 
+        height={1080} 
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" 
+      />
 
       {/* Overlay Content locked to the section */}
       <div className="absolute inset-0 w-full h-full pointer-events-none z-10 flex flex-col">
