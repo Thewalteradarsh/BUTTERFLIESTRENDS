@@ -4,7 +4,7 @@ import Link from "next/link";
 const categories = [
   { name: "Sleeveless Umbrella Kurtis", image: "/category-1.jpg" },
   { name: "Straight cut Kurtis", image: "/straight-cut.jpg.jpg", href: "/collections/straight-cut-kurti" },
-  { name: "A line Umbrella Kurtis", image: "/a-line.jpg.jpg", href: "/collections/a-line-umberla" },
+  { name: "A line Umbrella Kurtis", image: "/a-line.jpg.jpg", href: '/collections/a-line-umberla' },
   { name: "Short/Jeans Top", image: "/category-4.jpg" },
   { name: "Gown/ Dresses", image: "/category-5.jpg" },
   { name: "Co-ord Sets", image: "/category-6.jpg" },
