@@ -32,7 +32,7 @@ export default function ProductCard({ node }: { node: any }) {
   };
 
   return (
-    <div className="flex flex-col group cursor-pointer w-full">
+    <div className="flex flex-col group cursor-pointer shrink-0 w-[75vw] sm:w-[45vw] md:w-full snap-start">
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#EAE2D6] mb-3 md:mb-6">
         <motion.div 
           className="w-full h-full"
