@@ -2,7 +2,8 @@ import { getShopifyCollection } from "@/lib/shopify";
 import ProductGrid from "@/components/ProductGrid";
 import { notFound } from "next/navigation";
 
-export default async function CollectionPage({ params }: { params: { handle: string } }) {
+export default async function CollectionPage(props: { params: Promise<{ handle: string }> }) {
+  const params = await props.params;
   const collection = await getShopifyCollection(params.handle);
 
   if (!collection) {
