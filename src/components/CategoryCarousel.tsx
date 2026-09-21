@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const categories = [
   { name: "Sleeveless Umbrella Kurtis", image: "/category-1.jpg" },
-  { name: "Straight cut Kurtis", image: "/straight-cut.jpg.jpg" },
-  { name: "A line Umbrella Kurtis", image: "/a-line.jpg.jpg" },
+  { name: "Straight cut Kurtis", image: "/straight-cut.jpg.jpg", href: "/collections/straight-cut-kurti" },
+  { name: "A line Umbrella Kurtis", image: "/a-line.jpg.jpg", href: "/collections/a-line-umberla" },
   { name: "Short/Jeans Top", image: "/category-4.jpg" },
   { name: "Gown/ Dresses", image: "/category-5.jpg" },
   { name: "Co-ord Sets", image: "/category-6.jpg" },
@@ -19,25 +20,44 @@ export default function CategoryCarousel() {
       
       {/* Mobile: Horizontal Swipeable, Desktop: Grid/Wrap */}
       <div className="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-3 lg:grid-cols-4 md:gap-6 md:overflow-visible [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        {categories.map((category, index) => (
-          <div key={index} className="flex flex-col items-center group cursor-pointer text-center shrink-0 w-[75vw] sm:w-[45vw] md:w-full snap-start">
-            <div className="w-full aspect-[4/5] bg-[#FDFBF7] mb-4 border border-[#D5C8B8] transition-all duration-700 ease-out group-hover:border-[#BA2461] shadow-sm overflow-hidden relative flex items-center justify-center">
-              {/* Fallback placeholder text if image fails, and default placeholder image */}
-              <div className="absolute inset-0 bg-[#FDFBF7] flex items-center justify-center p-4">
-                <span className="text-[#BA2461]/30 font-serif text-2xl font-bold">{index + 1}</span>
+        {categories.map((category, index) => {
+          const content = (
+            <>
+              <div className="w-full aspect-[4/5] bg-[#FDFBF7] mb-4 border border-[#D5C8B8] transition-all duration-700 ease-out group-hover:border-[#BA2461] shadow-sm overflow-hidden relative flex items-center justify-center">
+                {/* Fallback placeholder text if image fails, and default placeholder image */}
+                <div className="absolute inset-0 bg-[#FDFBF7] flex items-center justify-center p-4">
+                  <span className="text-[#BA2461]/30 font-serif text-2xl font-bold">{index + 1}</span>
+                </div>
+                <Image 
+                  src={category.image} 
+                  alt={category.name} 
+                  fill 
+                  className="object-cover w-full h-full hover:scale-105 transition-transform duration-500 z-10" 
+                />
               </div>
-              <Image 
-                src={category.image} 
-                alt={category.name} 
-                fill 
-                className="object-cover w-full h-full hover:scale-105 transition-transform duration-500 z-10" 
-              />
+              <h3 className="text-base md:text-lg font-serif text-[#27272A] group-hover:text-[#BA2461] transition-colors duration-500 max-w-[200px]">
+                {category.name}
+              </h3>
+            </>
+          );
+
+          return category.href ? (
+            <Link 
+              key={index} 
+              href={category.href}
+              className="flex flex-col items-center group cursor-pointer text-center shrink-0 w-[75vw] sm:w-[45vw] md:w-full snap-start"
+            >
+              {content}
+            </Link>
+          ) : (
+            <div 
+              key={index} 
+              className="flex flex-col items-center group cursor-pointer text-center shrink-0 w-[75vw] sm:w-[45vw] md:w-full snap-start"
+            >
+              {content}
             </div>
-            <h3 className="text-base md:text-lg font-serif text-[#27272A] group-hover:text-[#BA2461] transition-colors duration-500 max-w-[200px]">
-              {category.name}
-            </h3>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
