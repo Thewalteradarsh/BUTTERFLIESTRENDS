@@ -1,30 +1,30 @@
+import SEOBlock from "@/components/SEOBlock";
+import BrandStory from "@/components/BrandStory";
 import { getShopifyProducts } from "@/lib/shopify";
 import Hero from "@/components/Hero";
 import ProductGrid from "@/components/ProductGrid";
+import ProductCard from "@/components/ProductCard";
 import Header from "@/components/Header";
-import CategoryCarousel from "@/components/CategoryCarousel";
 import FeatureGrid from "@/components/FeatureGrid";
 import SEOContent from "@/components/SEOContent";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
-import { Leaf, Truck, RefreshCcw, Banknote, Sparkles, Paintbrush, Ruler, Diamond } from "lucide-react";
+import InstagramReels from "@/components/InstagramReels";
+import WhyWeLove from "@/components/WhyWeLove";
+import Testimonials from "@/components/Testimonials";
+import { Leaf, Truck, RefreshCcw, Banknote } from "lucide-react";
 
 export default async function Home() {
   const products = await getShopifyProducts();
 
   const features = [
-    { icon: <Leaf size={24} />, title: "100% Organic Cotton", subtitle: "Breathable and soft for everyday comfort." },
-    { icon: <Truck size={24} />, title: "Free Delivery", subtitle: "On all prepaid orders across India." },
-    { icon: <RefreshCcw size={24} />, title: "Easy Replacement", subtitle: "Hassle-free returns within 7 days." },
-    { icon: <Banknote size={24} />, title: "COD Available", subtitle: "Pay at your doorstep." }
+    { icon: <Leaf size={24} />, title: "100% Organic Cotton", subtitle: "Breathable & skin-friendly fabrics made for all-day wear." },
+    { icon: <Truck size={24} />, title: "Free Delivery", subtitle: "Free shipping on all prepaid orders." },
+    { icon: <RefreshCcw size={24} />, title: "Easy Replacement", subtitle: "Simple and hassle-free replacement process." },
+    { icon: <Banknote size={24} />, title: "COD Available", subtitle: "Shop confidently with Cash on Delivery." }
   ];
 
-  const brandValues = [
-    { icon: <Diamond size={24} />, title: "Premium Cotton Fabrics", subtitle: "Sourced for ultimate quality and feel." },
-    { icon: <Paintbrush size={24} />, title: "Traditional Prints, Modern Style", subtitle: "Best of both worlds." },
-    { icon: <Ruler size={24} />, title: "Variety of Sizes", subtitle: "From XS to 3XL for the perfect fit." },
-    { icon: <Sparkles size={24} />, title: "Everyday Elegance", subtitle: "Effortless fashion for modern women." }
-  ];
+
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FDFBF7] font-sans text-[#27272A] relative">
@@ -39,8 +39,15 @@ export default async function Home() {
       <main className="flex-grow pt-10">
         <Hero />
 
-        {/* Categories Section */}
-        <CategoryCarousel />
+        {/* Best Selling Products Section */}
+        <section id="best-selling" className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-serif text-center mb-16 text-[#BA2461]">Best Selling Products</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {products.slice(0, 4).map((product: any, index: number) => (
+              <ProductCard key={index} node={product} />
+            ))}
+          </div>
+        </section>
 
         {/* Feature Section A */}
         <FeatureGrid title="Our Promise" items={features} bgColor="bg-[#FDFBF7]" />
@@ -56,14 +63,17 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Feature Section B (Brand Values) */}
-        <FeatureGrid title="Why Women Love Butterflies Trends" items={brandValues} bgColor="bg-[#F4E8E8]" />
+        {/* New Appended Sections */}
+        <InstagramReels />
+        <WhyWeLove />
+        <Testimonials />
 
         {/* SEO Content Section */}
         <SEOContent />
 
         {/* FAQ Section */}
         <FAQ />
+        <BrandStory />
       </main>
 
       {/* Footer */}

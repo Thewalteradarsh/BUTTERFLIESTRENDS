@@ -1,49 +1,48 @@
 "use client";
 
 import { useRef, useEffect } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
-  const { scrollYProgress } = useScroll();
+  const { scrollY } = useScroll();
+  const frameIndexRaw = useTransform(scrollY, [0, 1200], [0, 65]);
+  const smoothFrame = useSpring(frameIndexRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     for (let i = 1; i <= 66; i++) {
-      const img = new Image();
+      const img = new window.Image();
       img.src = `/hero-fabric_frames/frame_${String(i).padStart(3, '0')}.jpg`;
       imagesRef.current.push(img);
     }
 
     imagesRef.current[0].onload = () => {
-      const ctx = canvasRef.current?.getContext('2d');
-      if (ctx) {
-        ctx.drawImage(imagesRef.current[0], 0, 0, 1920, 1080);
-      }
+      canvasRef.current?.getContext('2d')?.drawImage(imagesRef.current[0], 0, 0, 1920, 1080);
     };
   }, []);
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const frameIndex = Math.min(65, Math.floor(latest * 66));
-    const ctx = canvasRef.current?.getContext('2d');
-    const img = imagesRef.current[frameIndex];
+  useMotionValueEvent(smoothFrame, "change", (latest) => {
+    const index = Math.max(0, Math.min(65, Math.round(latest)));
+    const img = imagesRef.current[index];
 
-    if (ctx && img && img.complete) {
-      ctx.drawImage(img, 0, 0, 1920, 1080);
+    if (img && img.complete) {
+      canvasRef.current?.getContext("2d")?.drawImage(img, 0, 0, 1920, 1080);
     }
   });
   return (
-    <section className="relative w-full h-[100dvh] md:h-screen bg-[#f2ece4] border-b border-[#EAE2D6] overflow-hidden">
-      {/* Scroll-Driven Canvas Background */}
-      <canvas 
-        ref={canvasRef} 
-        width={1920} 
-        height={1080} 
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" 
-      />
+    <section className="relative h-[250vh] bg-[#f2ece4]">
+      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
+        {/* Scroll-Driven Canvas Background */}
+        <canvas 
+          ref={canvasRef} 
+          width={1920} 
+          height={1080} 
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none" 
+        />
 
-      {/* Overlay Content locked to the section */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-10 flex flex-col">
+        {/* Overlay Content locked to the section */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none z-10 flex flex-col">
         
         {/* Mobile Gradient Overlay (Bottom 40%) */}
         <div className="absolute bottom-0 left-0 w-full h-[40%] bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/80 to-transparent md:hidden z-0" />
@@ -164,6 +163,7 @@ export default function Hero() {
           </div>
         </div>
         
+        </div>
       </div>
     </section>
   );

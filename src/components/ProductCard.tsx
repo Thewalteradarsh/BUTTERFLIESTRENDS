@@ -42,7 +42,7 @@ export default function ProductCard({ node }: { node: any }) {
         >
           <Image
             src={imageUrl}
-            alt={imageAlt}
+            alt={imageAlt || node.title || "Butterflies Trends Product"}
             fill
             className="object-cover object-center"
           />

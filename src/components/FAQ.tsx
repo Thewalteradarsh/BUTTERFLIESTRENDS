@@ -5,36 +5,36 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 
 const faqs = [
   {
-    question: "What fabrics do you use for your kurtis?",
-    answer: "We primarily use premium 100% organic cotton, along with traditional hand block prints, Kalamkari, Ajrakh, and Ikat fabrics. Our materials are chosen for their breathability, comfort, and lasting quality."
+    question: "What fabrics do you use?",
+    answer: "Most of our products are crafted using premium-quality cotton and breathable fabrics designed for everyday comfort."
   },
   {
     question: "Are your kurtis suitable for office wear?",
-    answer: "Yes! Our straight cut kurtis, A-line designs, and elegant co-ord sets are perfect for office wear. They blend traditional Indian aesthetics with modern, professional silhouettes."
+    answer: "Yes. Our collection includes elegant styles perfect for office wear, casual outings, and daily wear."
   },
   {
-    question: "Is Cash on Delivery (COD) available?",
-    answer: "Yes, we offer Cash on Delivery (COD) as a payment option for most pin codes across India."
+    question: "Do you offer Cash on Delivery?",
+    answer: "Yes, Cash on Delivery is available on eligible orders."
   },
   {
-    question: "Do you offer free shipping?",
-    answer: "Yes, we are delighted to offer absolutely free delivery on all prepaid orders."
+    question: "Do you provide free shipping?",
+    answer: "Yes, we offer free shipping on prepaid orders."
   },
   {
     question: "What is your replacement policy?",
-    answer: "We offer an easy replacement policy. If you receive a defective item or face size issues, you can initiate a replacement request within 7 days of delivery."
+    answer: "If there is a size or product issue, you can request a replacement within the specified replacement period."
   },
   {
-    question: "Do you deliver all over India?",
-    answer: "Yes, we provide pan-India shipping. We partner with reliable courier services to ensure your orders reach you safely and quickly, no matter where you are in the country."
+    question: "Do you deliver across India?",
+    answer: "Yes, we ship across India."
   },
   {
     question: "What sizes are available?",
-    answer: "We believe fashion is for everyone. Our collection features a wide variety of sizes, typically ranging from XS to 3XL. Please check the individual product pages for specific size availability."
+    answer: "We offer multiple sizes to ensure a comfortable fit for different body types."
   },
   {
     question: "How do I choose the right size?",
-    answer: "Each product page includes a detailed size guide with exact measurements. We recommend measuring yourself and comparing it with our size chart to find your perfect, comfortable fit."
+    answer: "Please refer to the Size Guide available on every product page."
   }
 ];
 
