@@ -25,8 +25,9 @@ export default function ProductCard({ node }: { node: any }) {
         window.location.href = checkoutUrl;
       }
     } catch (error) {
-      console.error(error);
+      console.error("Shopify API rejection:", error);
       alert("Failed to add to cart. Please try again.");
+    } finally {
       setLoading(false);
     }
   };

@@ -33,7 +33,7 @@ export default function Hero() {
     }
   });
   return (
-    <section className="relative w-full h-[100dvh] md:h-screen bg-[#FDFBF7] border-b border-[#EAE2D6] overflow-hidden">
+    <section className="relative w-full h-[100dvh] md:h-screen bg-[#f2ece4] border-b border-[#EAE2D6] overflow-hidden">
       {/* Scroll-Driven Canvas Background */}
       <canvas 
         ref={canvasRef} 
