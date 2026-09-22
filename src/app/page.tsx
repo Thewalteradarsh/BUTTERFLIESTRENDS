@@ -1,6 +1,6 @@
 import SEOBlock from "@/components/SEOBlock";
 import BrandStory from "@/components/BrandStory";
-import { getShopifyProducts } from "@/lib/shopify";
+import { getShopifyProducts, getCollectionProducts } from "@/lib/shopify";
 import Hero from "@/components/Hero";
 import ProductGrid from "@/components/ProductGrid";
 import ProductCard from "@/components/ProductCard";
@@ -16,6 +16,7 @@ import { Leaf, Truck, RefreshCcw, Banknote } from "lucide-react";
 
 export default async function Home() {
   const products = await getShopifyProducts();
+  const bestSellers = await getCollectionProducts('best-sellers');
 
   const features = [
     { icon: <Leaf size={24} />, title: "100% Organic Cotton", subtitle: "Breathable & skin-friendly fabrics made for all-day wear." },
@@ -43,9 +44,11 @@ export default async function Home() {
         <section id="best-selling" className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-serif text-center mb-16 text-[#BA2461]">Best Selling Products</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {products.slice(0, 4).map((product: any, index: number) => (
-              <ProductCard key={index} node={product} />
-            ))}
+            {bestSellers.map((product: any, index: number) => {
+              // Ensure we pass exactly the node that ProductCard expects
+              const node = product.node || product;
+              return <ProductCard key={index} node={node} />;
+            })}
           </div>
         </section>
 

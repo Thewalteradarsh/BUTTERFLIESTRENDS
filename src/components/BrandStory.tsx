@@ -2,7 +2,7 @@ import React from "react";
 
 export default function BrandStory() {
   return (
-    <section className="py-24 px-4 bg-white border-t border-[#EAE2D6]">
+    <section id="about" className="py-24 px-4 bg-white border-t border-[#EAE2D6]">
       <div className="max-w-3xl mx-auto text-center font-sans text-[#27272A] leading-relaxed">
         <h2 className="text-3xl md:text-5xl font-serif mb-12 text-[#BA2461]">About Us</h2>
         <div className="space-y-6 text-sm md:text-base">

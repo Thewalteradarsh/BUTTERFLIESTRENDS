@@ -1,13 +1,14 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { createCartAndGetCheckoutUrl } from "@/lib/actions";
 import { motion } from "framer-motion";
 
 export default function ProductCard({ node }: { node: any }) {
   const [loading, setLoading] = useState(false);
-  const price = node.priceRange?.minVariantPrice?.amount;
+  const price = node.priceRange?.minVariantPrice?.amount || node.variants?.edges?.[0]?.node?.price?.amount || "0";
   const imageUrl = node.images?.edges?.[0]?.node?.url || '/hero-kurti.png.png';
   const imageAlt = node.images?.edges?.[0]?.node?.altText || node.title;
   const variantId = node.variants?.edges?.[0]?.node?.id;
@@ -35,6 +36,7 @@ export default function ProductCard({ node }: { node: any }) {
   return (
     <div className="flex flex-col group cursor-pointer shrink-0 w-[75vw] sm:w-[45vw] md:w-full snap-start">
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#EAE2D6] mb-3 md:mb-6">
+        <Link href={`/products/${node.handle}`} className="absolute inset-0 z-0">
         <motion.div 
           className="w-full h-full"
           whileHover={{ scale: 1.03 }}
@@ -48,6 +50,7 @@ export default function ProductCard({ node }: { node: any }) {
           />
         </motion.div>
         
+        </Link>
         {/* Quick Add Button overlay (Desktop Only) */}
         <div className="hidden md:block absolute bottom-0 left-0 w-full p-4 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out z-10">
           <button 
@@ -65,7 +68,7 @@ export default function ProductCard({ node }: { node: any }) {
       
       <div className="flex flex-col items-center text-center">
         <p className="text-[10px] md:text-xs tracking-widest text-[#27272A]/70 uppercase mb-1 md:mb-2">New Arrival</p>
-        <h3 className="text-xs md:text-sm lg:text-lg font-serif text-[#27272A] mb-1 md:mb-2 line-clamp-1" title={node.title}>{node.title}</h3>
+        <Link href={`/products/${node.handle}`} className="hover:text-[#BA2461] transition-colors"><h3 className="text-xs md:text-sm lg:text-lg font-serif text-[#27272A] mb-1 md:mb-2 line-clamp-1" title={node.title}>{node.title}</h3></Link>
         <p className="text-[#27272A] font-serif text-sm font-semibold md:text-base md:font-normal">₹{Number(price).toLocaleString('en-IN')}</p>
         
         {/* Mobile Add to Cart Button (Mobile Only) */}

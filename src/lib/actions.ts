@@ -1,6 +1,6 @@
 "use server";
 
-export async function createCartAndGetCheckoutUrl(variantId: string) {
+export async function createCartAndGetCheckoutUrl(variantId: string, quantity: number = 1) {
     // For mock products, just redirect to home
     if (variantId.startsWith("mock-")) {
         return "/";
@@ -32,7 +32,7 @@ export async function createCartAndGetCheckoutUrl(variantId: string) {
             lines: [
                 {
                     merchandiseId: variantId,
-                    quantity: 1
+                    quantity: quantity
                 }
             ]
         }

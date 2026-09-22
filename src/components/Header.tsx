@@ -38,10 +38,10 @@ export default function Header() {
             />
           </Link>
           <nav className="flex gap-12 text-[#27272A] font-sans tracking-widest text-xs uppercase">
-            <a href="#" className="hover:text-[#BA2461] transition-colors duration-300">Home</a>
-            <a href="#products" className="hover:text-[#BA2461] transition-colors duration-300">Collections</a>
-            <a href="#" className="hover:text-[#BA2461] transition-colors duration-300">About</a>
-            <a href="#" className="hover:text-[#BA2461] transition-colors duration-300">Contact</a>
+            <Link href="/" className="hover:text-[#BA2461] transition-colors duration-300">Home</Link>
+            <Link href="/#products" className="hover:text-[#BA2461] transition-colors duration-300">Collections</Link>
+            <Link href="/#about" className="hover:text-[#BA2461] transition-colors duration-300">About</Link>
+            <Link href="/#footer" className="hover:text-[#BA2461] transition-colors duration-300">Contact</Link>
           </nav>
           <button 
             onClick={() => setIsCartOpen(true)}
