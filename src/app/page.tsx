@@ -37,7 +37,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <main className="flex-grow pt-10">
+      <main className="flex-grow">
         <Hero />
 
         {/* Best Selling Products Section */}

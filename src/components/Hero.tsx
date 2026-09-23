@@ -87,8 +87,8 @@ export default function Hero() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-[250vh] bg-[#f2ece4]">
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden" style={{ willChange: 'transform' }}>
+    <section ref={containerRef} className="relative h-[300vh] bg-[#f2ece4]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden" style={{ willChange: 'transform' }}>
         {/* Scroll-Driven Canvas Background */}
         <canvas 
           ref={canvasRef} 
