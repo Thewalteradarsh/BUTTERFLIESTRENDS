@@ -39,7 +39,7 @@ export default function ProductForm({ product }: { product: any }) {
     try {
       const checkoutUrl = await createCartAndGetCheckoutUrl(selectedVariant.id, quantity);
       if (checkoutUrl) {
-        window.location.href = checkoutUrl;
+        window.dispatchEvent(new CustomEvent("open-cart", { detail: { checkoutUrl } }));
       }
     } catch (error) {
       console.error("Shopify API rejection:", error);

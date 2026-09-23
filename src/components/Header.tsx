@@ -9,6 +9,7 @@ export default function Header() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +17,18 @@ export default function Header() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleOpenCart = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail?.checkoutUrl) {
+        setCheckoutUrl(customEvent.detail.checkoutUrl);
+      }
+      setIsCartOpen(true);
+    };
+    window.addEventListener("open-cart", handleOpenCart);
+    return () => window.removeEventListener("open-cart", handleOpenCart);
   }, []);
 
   return (
@@ -94,7 +107,7 @@ export default function Header() {
         </div>
       </header>
       
-      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} checkoutUrl={checkoutUrl} />
     </>
   );
 }

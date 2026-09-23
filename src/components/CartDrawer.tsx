@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 interface CartDrawerProps {
   isOpen: boolean;
   onClose: () => void;
+  checkoutUrl?: string | null;
 }
 
 interface CartItem {
@@ -17,7 +18,7 @@ interface CartItem {
   image: string;
 }
 
-export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
+export default function CartDrawer({ isOpen, onClose, checkoutUrl }: CartDrawerProps) {
   // Using local state to manage the mock cart until a global store (e.g. Zustand/Context) is implemented.
   const [cartItems, setCartItems] = useState<CartItem[]>([
     { id: "1", title: "Maroon A-Line Kurti", size: "M", price: 1299, quantity: 1, image: "/hero-kurti.png.png" },
@@ -126,6 +127,13 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
               <p className="text-[#27272A]/60 text-xs mb-6 tracking-wide">Shipping & taxes calculated at checkout.</p>
               <button 
                 disabled={cartItems.length === 0}
+                onClick={() => {
+                  if (checkoutUrl) {
+                    window.location.href = checkoutUrl;
+                  } else {
+                    alert("Mock Checkout. Connect Shopify cart for real checkout.");
+                  }
+                }}
                 className={`w-full py-4 text-[#FDFBF7] font-medium tracking-wide transition-colors duration-300 ${cartItems.length === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#BA2461] hover:bg-[#951C4D]'}`}
               >
                 Checkout
