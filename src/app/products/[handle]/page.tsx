@@ -37,9 +37,9 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:items-start">
           
           {/* Left: Image Gallery */}
-          <div className="md:col-span-7 grid grid-cols-2 gap-4">
+          <div className="md:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
             {images.map((edge: any, idx: number) => (
-              <div key={idx} className={`relative aspect-[4/5] w-full bg-[#EAE2D6] rounded-sm overflow-hidden shadow-sm ${images.length % 2 !== 0 && idx === images.length - 1 ? 'col-span-2' : ''}`}>
+              <div key={idx} className={`relative aspect-[4/5] w-full bg-[#EAE2D6] rounded-sm overflow-hidden shadow-sm ${images.length % 2 !== 0 && idx === images.length - 1 ? 'md:col-span-2' : ''}`}>
                 <Image
                   src={edge.node.url}
                   alt={edge.node.altText || product.title}

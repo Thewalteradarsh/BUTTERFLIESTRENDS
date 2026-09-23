@@ -41,8 +41,8 @@ export default function ProductCard({ node }: { node: any }) {
       
       <div className="flex flex-col items-center text-center w-full px-1">
         <p className="text-[10px] md:text-xs tracking-widest text-[#27272A]/70 uppercase mb-1 md:mb-2">New Arrival</p>
-        <Link href={`/products/${node.handle}`} className="hover:text-[#BA2461] transition-colors w-full overflow-hidden">
-          <h3 className="text-xs md:text-sm lg:text-lg font-serif text-[#27272A] mb-1 md:mb-2 truncate w-full" title={node.title}>{node.title}</h3>
+        <Link href={`/products/${node.handle}`} className="hover:text-[#BA2461] transition-colors w-full">
+          <h3 className="text-xs md:text-sm lg:text-lg font-serif text-[#27272A] mb-1 md:mb-2 line-clamp-2 min-h-[32px] md:min-h-[48px] w-full" title={node.title}>{node.title}</h3>
         </Link>
         <p className="text-[#27272A] font-serif text-sm font-semibold md:text-base md:font-normal">₹{Number(price).toLocaleString('en-IN')}</p>
         
