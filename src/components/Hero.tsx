@@ -1,46 +1,13 @@
 "use client";
 
-import { useRef, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const { scrollY } = useScroll();
-  const frameIndexRaw = useTransform(scrollY, [0, 1200], [0, 65]);
-  const smoothFrame = useSpring(frameIndexRaw, { stiffness: 100, damping: 30, restDelta: 0.001 });
-
-  useEffect(() => {
-    for (let i = 1; i <= 66; i++) {
-      const img = new window.Image();
-      img.src = `/hero-fabric_frames/frame_${String(i).padStart(3, '0')}.jpg`;
-      imagesRef.current.push(img);
-    }
-
-    imagesRef.current[0].onload = () => {
-      canvasRef.current?.getContext('2d')?.drawImage(imagesRef.current[0], 0, 0, 1920, 1080);
-    };
-  }, []);
-
-  useMotionValueEvent(smoothFrame, "change", (latest) => {
-    const index = Math.max(0, Math.min(65, Math.round(latest)));
-    const img = imagesRef.current[index];
-
-    if (img && img.complete) {
-      canvasRef.current?.getContext("2d")?.drawImage(img, 0, 0, 1920, 1080);
-    }
-  });
   return (
-    <section className="relative h-[250vh] bg-[#f2ece4]">
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
-        {/* Scroll-Driven Canvas Background */}
-        <canvas 
-          ref={canvasRef} 
-          width={1920} 
-          height={1080} 
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none" 
-        />
-
+    <section 
+      className="relative w-full h-[60vh] md:h-[80vh] lg:h-[100vh] bg-cover bg-center bg-no-repeat md:bg-fixed bg-[#f2ece4]"
+      style={{ backgroundImage: 'url(/hero-fabric_frames/frame_001.jpg)' }}
+    >
         {/* Overlay Content locked to the section */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-10 flex flex-col">
         
@@ -163,8 +130,6 @@ export default function Hero() {
           </div>
         </div>
         
-        </div>
-      </div>
     </section>
   );
 }

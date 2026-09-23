@@ -28,7 +28,7 @@ export default async function Home() {
 
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FDFBF7] font-sans text-[#27272A] relative">
+    <div className="flex flex-col min-h-screen bg-[#FDFBF7] font-sans text-[#27272A] relative overflow-x-hidden w-full">
       {/* Absolute Header Overlay */}
       <div className="absolute top-0 left-0 w-full z-50 pointer-events-none">
         <div className="pointer-events-auto">
