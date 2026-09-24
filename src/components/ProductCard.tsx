@@ -10,7 +10,7 @@ export default function ProductCard({ node }: { node: any }) {
   const imageAlt = node.images?.edges?.[0]?.node?.altText || node.title;
 
   return (
-    <div className="flex flex-col h-full group cursor-pointer shrink-0 w-[75vw] sm:w-[45vw] md:w-full snap-start">
+    <div className="flex flex-col min-w-0 h-full group cursor-pointer shrink-0 w-[75vw] sm:w-[45vw] md:w-full snap-start">
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#EAE2D6] mb-3 md:mb-6">
         <Link href={`/products/${node.handle}`} className="absolute inset-0 z-0">
         <motion.div 
@@ -42,8 +42,8 @@ export default function ProductCard({ node }: { node: any }) {
       <div className="flex flex-col flex-grow justify-between items-center text-center w-full px-1">
         <div className="flex flex-col items-center w-full">
           <p className="text-[10px] md:text-xs tracking-widest text-[#27272A]/70 uppercase mb-1 md:mb-2">New Arrival</p>
-          <Link href={`/products/${node.handle}`} className="hover:text-[#BA2461] transition-colors w-full">
-            <h3 className="text-sm line-clamp-2 min-h-[2.5rem] mt-1 mb-2 md:text-sm lg:text-lg font-serif text-[#27272A] w-full" title={node.title}>{node.title}</h3>
+          <Link href={`/products/${node.handle}`} className="hover:text-[#BA2461] transition-colors w-full min-w-0">
+            <h3 className="text-sm font-medium truncate w-full overflow-hidden block mt-1 mb-2 md:text-sm lg:text-lg font-serif text-[#27272A]" title={node.title}>{node.title}</h3>
           </Link>
           <p className="text-[#27272A] font-serif text-sm font-semibold md:text-base md:font-normal">₹{Number(price).toLocaleString('en-IN')}</p>
         </div>
