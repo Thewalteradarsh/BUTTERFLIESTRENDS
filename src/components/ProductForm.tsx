@@ -57,7 +57,7 @@ export default function ProductForm({ product }: { product: any }) {
             <h3 className="text-sm font-sans tracking-widest uppercase text-[#27272A]">Select Size</h3>
             <span className="text-xs text-[#27272A]/70 underline cursor-pointer hover:text-[#BA2461]">Size Guide</span>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 mt-2">
             {sizes.map((size: string) => {
               const variant = variants.find((v: any) => 
                 v.selectedOptions.some((opt: any) => opt.name.toLowerCase() === "size" && opt.value === size)
@@ -70,7 +70,7 @@ export default function ProductForm({ product }: { product: any }) {
                   key={size}
                   onClick={() => handleSizeClick(size)}
                   disabled={!isAvailable}
-                  className={`min-w-[3rem] h-12 px-4 flex items-center justify-center border text-sm font-medium transition-colors ${
+                  className={`min-w-[3rem] h-10 px-4 flex items-center justify-center border rounded-md text-sm font-medium transition-colors ${
                     !isAvailable 
                       ? 'border-[#EAE2D6] text-gray-300 cursor-not-allowed line-through' 
                       : isSelected 
@@ -87,7 +87,7 @@ export default function ProductForm({ product }: { product: any }) {
       )}
 
       <div className="flex flex-col sm:flex-row gap-4 mb-4">
-        <div className="flex items-center border border-[#EAE2D6] bg-white h-12 sm:w-32 shrink-0">
+        <div className="flex items-center border border-[#EAE2D6] rounded-md bg-white h-12 sm:w-32 shrink-0 overflow-hidden">
           <button onClick={decrement} className="flex-1 h-full flex items-center justify-center hover:bg-gray-50 text-xl font-light">-</button>
           <span className="flex-1 text-center text-sm font-medium">{quantity}</span>
           <button onClick={increment} className="flex-1 h-full flex items-center justify-center hover:bg-gray-50 text-xl font-light">+</button>
@@ -96,8 +96,8 @@ export default function ProductForm({ product }: { product: any }) {
         <button
           onClick={handleAddToCart}
           disabled={!selectedVariant || loading}
-          className={`flex-1 h-12 bg-[#6B4E3D] text-[#FDFBF7] font-sans tracking-widest text-xs sm:text-sm uppercase shadow-sm transition-colors ${
-            !selectedVariant || loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#533b2e]'
+          className={`w-full py-3 mt-0 sm:mt-0 bg-[#b8325a] text-white rounded-md font-bold text-center tracking-widest text-xs sm:text-sm uppercase transition-colors ${
+            !selectedVariant || loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#951C4D]'
           }`}
         >
           {!selectedVariant ? "Select a Size" : loading ? "Adding..." : "Add to Cart"}

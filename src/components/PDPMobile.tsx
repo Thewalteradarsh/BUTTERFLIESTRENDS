@@ -7,7 +7,7 @@ export default function PDPMobile({ product, images, price }: { product: any, im
   return (
     <div className="flex flex-col w-full">
       {/* Mobile Image Carousel */}
-      <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-6 w-full -mx-4 px-4">
+      <div className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 pb-6 w-full pl-4">
         {images.map((edge: any, idx: number) => (
           <div key={idx} className="w-[85vw] flex-shrink-0 snap-center relative aspect-[4/9] rounded-md overflow-hidden">
             <Image
@@ -22,7 +22,7 @@ export default function PDPMobile({ product, images, price }: { product: any, im
       </div>
 
       {/* Product Details (Full Width for Thumb Reach) */}
-      <div className="flex flex-col w-full pt-2">
+      <div className="px-4 py-6 flex flex-col gap-4 w-full">
         <h1 className="text-3xl font-serif text-[#27272A] mb-3 leading-tight w-full">
           {product.title}
         </h1>
