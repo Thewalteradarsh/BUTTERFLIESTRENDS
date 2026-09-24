@@ -54,7 +54,7 @@ export default function Header() {
             <Link href="/" className="hover:text-[#BA2461] transition-colors duration-300">Home</Link>
             <Link href="/#products" className="hover:text-[#BA2461] transition-colors duration-300">Collections</Link>
             <Link href="/#about" className="hover:text-[#BA2461] transition-colors duration-300">About</Link>
-            <Link href="/#footer" className="hover:text-[#BA2461] transition-colors duration-300">Contact</Link>
+            <Link href="/contact" className="hover:text-[#BA2461] transition-colors duration-300">Contact</Link>
           </nav>
           <button 
             onClick={() => setIsCartOpen(true)}

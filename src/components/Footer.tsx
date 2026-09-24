@@ -13,7 +13,7 @@ export default function Footer() {
           <Link href="/" className="hover:text-white transition-colors duration-300">Home</Link>
           <Link href="/#products" className="hover:text-white transition-colors duration-300">Shop</Link>
           <Link href="/#about" className="hover:text-white transition-colors duration-300">About</Link>
-          <Link href="/#footer" className="hover:text-white transition-colors duration-300">Contact</Link>
+          <Link href="/contact" className="hover:text-white transition-colors duration-300">Contact</Link>
         </div>
         <p className="text-xs text-[#FDFBF7] uppercase tracking-widest">
           © {new Date().getFullYear()} Butterflies Trends. All rights reserved.
