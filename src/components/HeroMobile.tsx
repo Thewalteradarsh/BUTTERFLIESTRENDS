@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function HeroMobile() {
   return (
@@ -21,16 +22,40 @@ export default function HeroMobile() {
 
       {/* Mobile Content */}
       <div className="absolute bottom-8 left-4 right-4 z-10 flex flex-col items-center text-center pointer-events-auto">
-        <span className="text-[10px] text-[#27272A]/70 uppercase tracking-widest font-sans mb-3 font-semibold">
+        <motion.span 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="text-[10px] text-[#27272A]/70 uppercase tracking-widest font-sans mb-3 font-semibold"
+        >
           Fashion For A Brighter You
-        </span>
-        <h1 className="text-3xl font-serif text-[#BA2461] mb-3 leading-tight drop-shadow-sm px-2">
+        </motion.span>
+        <motion.h1 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="text-3xl font-serif text-[#BA2461] mb-3 leading-tight drop-shadow-sm px-2"
+        >
           100% Cotton Kurtis & Ethnic Wear
-        </h1>
-        <p className="text-sm text-[#27272A] mb-5 font-serif drop-shadow-sm px-2">
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="text-sm text-[#27272A] mb-5 font-serif drop-shadow-sm px-2"
+        >
           Hand Block Prints • Kalamkari • Ajrakh
-        </p>
-        <div className="flex flex-row justify-center gap-2 w-full px-2 max-w-sm">
+        </motion.p>
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+          className="flex flex-row justify-center gap-2 w-full px-2 max-w-sm"
+        >
           <a 
             href="#products" 
             className="flex-1 inline-flex items-center justify-center py-3 px-2 bg-[#BA2461] text-[#FDFBF7] hover:bg-[#951C4D] font-sans tracking-widest text-xs uppercase shadow-lg text-center"
@@ -43,7 +68,7 @@ export default function HeroMobile() {
           >
             Explore All
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
