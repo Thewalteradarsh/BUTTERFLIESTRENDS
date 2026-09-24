@@ -1,25 +1,102 @@
 "use client";
 
-import Image from "next/image";
+import { useRef, useEffect } from 'react';
 import { motion } from "framer-motion";
 
 export default function HeroMobile() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const totalFrames = 66;
+
+  useEffect(() => {
+    let loadedCount = 0;
+    for (let i = 1; i <= totalFrames; i++) {
+      const img = new window.Image();
+      img.src = `/hero-fabric_frames/frame_${String(i).padStart(3, '0')}.jpg`;
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === 1) {
+          drawFrame(1);
+        }
+      };
+      imagesRef.current[i] = img;
+    }
+
+    const setCanvasSize = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+    };
+
+    const drawFrame = (index: number) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      const img = imagesRef.current[index];
+      if (!img || !img.complete) return;
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+
+    setCanvasSize();
+    drawFrame(1);
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (!containerRef.current) {
+            ticking = false;
+            return;
+          }
+          
+          const rect = containerRef.current.getBoundingClientRect();
+          const scrollTop = -rect.top;
+          const maxScroll = rect.height - window.innerHeight;
+          let scrollFraction = scrollTop / maxScroll;
+          scrollFraction = Math.max(0, Math.min(1, scrollFraction));
+          
+          const frameIndex = Math.min(
+            totalFrames,
+            Math.max(1, Math.floor(scrollFraction * totalFrames) + 1)
+          );
+          
+          drawFrame(frameIndex);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    const handleResize = () => {
+      setCanvasSize();
+      handleScroll();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
-    <section className="relative h-[200vh] w-full bg-[#f2ece4]">
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col items-center justify-center">
-        {/* Fallback Static Image for Mobile */}
-        <div className="absolute inset-0 w-full h-full">
-          <Image 
-            src="/hero-fabric_frames/frame_066.jpg" 
-            alt="100% Cotton Kurtis" 
-            fill 
-            priority
-            className="object-cover object-center"
-          />
-        </div>
+    <section ref={containerRef} className="relative h-[300vh] w-full bg-[#f2ece4]">
+      <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex flex-col items-center justify-center">
+        {/* Scroll-Driven Canvas Background */}
+        <canvas 
+          ref={canvasRef} 
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none" 
+        />
 
         {/* Mobile Gradient Overlay */}
-        <div className="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/80 to-transparent z-0" />
+        <div className="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/80 to-transparent z-0 pointer-events-none" />
 
         {/* Mobile Content */}
         <div className="absolute bottom-8 left-4 right-4 z-10 flex flex-col items-center text-center pointer-events-auto">
