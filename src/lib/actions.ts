@@ -6,8 +6,17 @@ export async function createCartAndGetCheckoutUrl(variantId: string, quantity: n
         return "/";
     }
 
-    const domain = process.env.SHOPIFY_STORE_DOMAIN || process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
-    const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || process.env.NEXT_PUBLIC_SHOPIFY_TOKEN;
+    return createCartFromItems([{ merchandiseId: variantId, quantity }]);
+}
+
+export async function createCartFromItems(items: { merchandiseId: string, quantity: number }[]) {
+    // Check if all items are mock items
+    if (items.length > 0 && items.every(item => item.merchandiseId.startsWith("mock-"))) {
+        return "/";
+    }
+
+    const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || process.env.SHOPIFY_STORE_DOMAIN || process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
+    const token = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || process.env.NEXT_PUBLIC_SHOPIFY_TOKEN;
 
     if (!domain || !token) {
         throw new Error("Missing Shopify credentials");
@@ -29,12 +38,7 @@ export async function createCartAndGetCheckoutUrl(variantId: string, quantity: n
 
     const variables = {
         input: {
-            lines: [
-                {
-                    merchandiseId: variantId,
-                    quantity: quantity
-                }
-            ]
+            lines: items
         }
     };
 

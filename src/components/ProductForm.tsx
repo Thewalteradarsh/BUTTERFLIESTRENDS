@@ -7,6 +7,7 @@ export default function ProductForm({ product }: { product: any }) {
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [isBuyingNow, setIsBuyingNow] = useState(false);
 
   // Extract Size option
   const sizeOption = product.options?.find((opt: any) => opt.name.toLowerCase() === "size");
@@ -46,6 +47,24 @@ export default function ProductForm({ product }: { product: any }) {
       alert("Failed to add to cart. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleBuyItNow = async () => {
+    if (!selectedVariant) return;
+    setIsBuyingNow(true);
+    try {
+      const checkoutUrl = await createCartAndGetCheckoutUrl(selectedVariant.id, quantity);
+      if (checkoutUrl) {
+        window.location.href = checkoutUrl;
+      } else {
+        alert("Failed to generate checkout link.");
+      }
+    } catch (error) {
+      console.error("Shopify API rejection:", error);
+      alert("Failed to initiate checkout. Please try again.");
+    } finally {
+      setIsBuyingNow(false);
     }
   };
 
@@ -95,14 +114,24 @@ export default function ProductForm({ product }: { product: any }) {
         
         <button
           onClick={handleAddToCart}
-          disabled={!selectedVariant || loading}
-          className={`w-full py-3 mt-0 sm:mt-0 bg-[#b8325a] text-white rounded-md font-bold text-center tracking-widest text-xs sm:text-sm uppercase transition-colors ${
-            !selectedVariant || loading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#951C4D]'
+          disabled={!selectedVariant || loading || isBuyingNow}
+          className={`flex-1 py-3 bg-white border border-[#b8325a] text-[#b8325a] rounded-md font-bold text-center tracking-widest text-xs sm:text-sm uppercase transition-colors ${
+            !selectedVariant || loading || isBuyingNow ? 'opacity-70 cursor-not-allowed border-gray-400 text-gray-400' : 'hover:bg-[#faf6f3]'
           }`}
         >
-          {!selectedVariant ? "Select a Size" : loading ? "Adding..." : "Add to Cart"}
+          {loading ? "Adding..." : "Add to Cart"}
         </button>
       </div>
+
+      <button
+        onClick={handleBuyItNow}
+        disabled={!selectedVariant || loading || isBuyingNow}
+        className={`w-full py-4 bg-[#b8325a] text-white rounded-md font-bold text-center tracking-widest text-xs sm:text-sm uppercase transition-colors ${
+          !selectedVariant || loading || isBuyingNow ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#951C4D]'
+        }`}
+      >
+        {!selectedVariant ? "Select a Size" : isBuyingNow ? "Processing..." : "Buy It Now"}
+      </button>
     </div>
   );
 }

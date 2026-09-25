@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createCartFromItems } from "../lib/actions";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface CartDrawerProps {
@@ -24,6 +25,7 @@ export default function CartDrawer({ isOpen, onClose, checkoutUrl }: CartDrawerP
     { id: "1", title: "Maroon A-Line Kurti", size: "M", price: 1299, quantity: 1, image: "/hero-kurti.png.png" },
     { id: "2", title: "Straight Cut Silk", size: "L", price: 1899, quantity: 1, image: "/hero-kurti.png.png" },
   ]);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   const handleUpdateQuantity = (id: string, newQuantity: number) => {
     if (newQuantity < 1) {
@@ -126,17 +128,27 @@ export default function CartDrawer({ isOpen, onClose, checkoutUrl }: CartDrawerP
               </div>
               <p className="text-[#27272A]/60 text-xs mb-6 tracking-wide">Shipping & taxes calculated at checkout.</p>
               <button 
-                disabled={cartItems.length === 0}
-                onClick={() => {
-                  if (checkoutUrl) {
-                    window.location.href = checkoutUrl;
-                  } else {
-                    alert("Mock Checkout. Connect Shopify cart for real checkout.");
+                disabled={cartItems.length === 0 || isCheckingOut}
+                onClick={async () => {
+                  try {
+                    setIsCheckingOut(true);
+                    const items = cartItems.map(item => ({ merchandiseId: item.id, quantity: item.quantity }));
+                    const url = await createCartFromItems(items);
+                    if (url) {
+                      window.location.href = url;
+                    } else {
+                      alert("Checkout URL not returned.");
+                    }
+                  } catch (error) {
+                    console.error("Error creating checkout:", error);
+                    alert("Failed to initiate checkout. Please try again.");
+                  } finally {
+                    setIsCheckingOut(false);
                   }
                 }}
-                className={`w-full py-4 text-[#FDFBF7] font-medium tracking-wide transition-colors duration-300 ${cartItems.length === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#BA2461] hover:bg-[#951C4D]'}`}
+                className={`w-full py-4 text-[#FDFBF7] font-medium tracking-wide transition-colors duration-300 ${cartItems.length === 0 || isCheckingOut ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#BA2461] hover:bg-[#951C4D]'}`}
               >
-                Checkout
+                {isCheckingOut ? "Processing..." : "Checkout"}
               </button>
             </div>
           </motion.div>
