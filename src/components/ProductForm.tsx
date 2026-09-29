@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createCartAndGetCheckoutUrl } from "@/lib/actions";
+import { createCart, addToCart } from "@/lib/shopify";
 
 export default function ProductForm({ product }: { product: any }) {
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
@@ -34,13 +34,53 @@ export default function ProductForm({ product }: { product: any }) {
   const increment = () => setQuantity(prev => prev + 1);
   const decrement = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
 
+  const processCartAction = async () => {
+    if (!selectedVariant) return null;
+    let cartId = localStorage.getItem("shopify_cart_id");
+    let checkoutUrl = "";
+
+    // For mock variants, just return home
+    if (selectedVariant.id.startsWith("mock-")) {
+      return "/";
+    }
+
+    if (cartId) {
+      try {
+        const cart = await addToCart(cartId, [{ merchandiseId: selectedVariant.id, quantity }]);
+        if (cart) {
+          checkoutUrl = cart.checkoutUrl;
+        } else {
+          // Fallback if cart doesn't exist or expired
+          const newCart = await createCart(selectedVariant.id, quantity);
+          if (newCart) {
+            localStorage.setItem("shopify_cart_id", newCart.id);
+            checkoutUrl = newCart.checkoutUrl;
+          }
+        }
+      } catch (err) {
+        const newCart = await createCart(selectedVariant.id, quantity);
+        if (newCart) {
+          localStorage.setItem("shopify_cart_id", newCart.id);
+          checkoutUrl = newCart.checkoutUrl;
+        }
+      }
+    } else {
+      const newCart = await createCart(selectedVariant.id, quantity);
+      if (newCart) {
+        localStorage.setItem("shopify_cart_id", newCart.id);
+        checkoutUrl = newCart.checkoutUrl;
+      }
+    }
+    return checkoutUrl;
+  };
+
   const handleAddToCart = async () => {
     if (!selectedVariant) return;
     setLoading(true);
     try {
-      const checkoutUrl = await createCartAndGetCheckoutUrl(selectedVariant.id, quantity);
+      const checkoutUrl = await processCartAction();
       if (checkoutUrl) {
-        window.dispatchEvent(new CustomEvent("open-cart", { detail: { checkoutUrl } }));
+        window.location.href = checkoutUrl;
       }
     } catch (error) {
       console.error("Shopify API rejection:", error);
@@ -54,7 +94,7 @@ export default function ProductForm({ product }: { product: any }) {
     if (!selectedVariant) return;
     setIsBuyingNow(true);
     try {
-      const checkoutUrl = await createCartAndGetCheckoutUrl(selectedVariant.id, quantity);
+      const checkoutUrl = await processCartAction();
       if (checkoutUrl) {
         window.location.href = checkoutUrl;
       } else {

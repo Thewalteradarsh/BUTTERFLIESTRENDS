@@ -338,3 +338,125 @@ export async function getCollectionProducts(collectionHandle: string) {
         return getFallbackProducts().slice(0, 4);
     }
 }
+
+export async function shopifyFetch({ query, variables }: { query: string, variables?: any }) {
+    const domain = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN || process.env.SHOPIFY_STORE_DOMAIN;
+    const token = process.env.NEXT_PUBLIC_SHOPIFY_TOKEN || process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+
+    if (!domain || !token) {
+        throw new Error("Missing Shopify credentials.");
+    }
+
+    const response = await fetch(`https://${domain}/api/2024-01/graphql.json`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Storefront-Access-Token': token,
+        },
+        body: JSON.stringify({ query, variables }),
+        cache: 'no-store'
+    });
+
+    if (!response.ok) {
+        throw new Error(`[Shopify Fetch] HTTP Error: ${response.status}`);
+    }
+
+    const json = await response.json();
+    if (json.errors) {
+        throw new Error(`GraphQL Errors: ${JSON.stringify(json.errors)}`);
+    }
+
+    return json;
+}
+
+export async function createCart(variantId?: string, quantity?: number) {
+    const query = `
+        mutation cartCreate($input: CartInput) {
+            cartCreate(input: $input) {
+                cart {
+                    id
+                    checkoutUrl
+                }
+                userErrors {
+                    field
+                    message
+                }
+            }
+        }
+    `;
+    let variables = {};
+    if (variantId && quantity) {
+        variables = {
+            input: {
+                lines: [
+                    {
+                        merchandiseId: variantId,
+                        quantity: quantity
+                    }
+                ]
+            }
+        };
+    }
+    const res = await shopifyFetch({ query, variables });
+    return res.data?.cartCreate?.cart;
+}
+
+export async function addToCart(cartId: string, lines: { merchandiseId: string, quantity: number }[]) {
+    const query = `
+        mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+            cartLinesAdd(cartId: $cartId, lines: $lines) {
+                cart {
+                    id
+                    checkoutUrl
+                }
+                userErrors {
+                    field
+                    message
+                }
+            }
+        }
+    `;
+    const variables = {
+        cartId,
+        lines
+    };
+    const res = await shopifyFetch({ query, variables });
+    return res.data?.cartLinesAdd?.cart;
+}
+
+export async function getCart(cartId: string) {
+    const query = `
+        query getCart($cartId: ID!) {
+            cart(id: $cartId) {
+                id
+                checkoutUrl
+                lines(first: 10) {
+                    edges {
+                        node {
+                            id
+                            quantity
+                            merchandise {
+                                ... on ProductVariant {
+                                    id
+                                    title
+                                    price {
+                                        amount
+                                    }
+                                    product {
+                                        title
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `;
+    const variables = {
+        cartId
+    };
+    const res = await shopifyFetch({ query, variables });
+    return res.data?.cart;
+}
+
