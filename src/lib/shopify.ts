@@ -49,6 +49,7 @@ export async function getShopifyProducts() {
                 'X-Shopify-Storefront-Access-Token': token,
             },
             body: JSON.stringify({ query }),
+            next: { tags: ['products'] },
         });
 
         if (!response.ok) {
