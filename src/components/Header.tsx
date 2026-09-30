@@ -56,15 +56,26 @@ export default function Header() {
             <Link href="/about" className="hover:text-[#BA2461] transition-colors duration-300">About</Link>
             <Link href="/contact" className="hover:text-[#BA2461] transition-colors duration-300">Contact</Link>
           </nav>
-          <button 
-            onClick={() => setIsCartOpen(true)}
-            className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300"
-            aria-label="Open cart"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-6">
+            <a 
+              href={`https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN}/account/login`}
+              className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300"
+              aria-label="Account"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </a>
+            <button 
+              onClick={() => setIsCartOpen(true)}
+              className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300"
+              aria-label="Open cart"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Layout */}
@@ -94,16 +105,27 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Cart Icon (Right) */}
-          <button 
-            onClick={() => setIsCartOpen(true)}
-            className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300 justify-self-end"
-            aria-label="Open cart"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-            </svg>
-          </button>
+          {/* Account & Cart Icons (Right) */}
+          <div className="flex items-center gap-4 justify-self-end">
+            <a 
+              href={`https://${process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN}/account/login`}
+              className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300"
+              aria-label="Account"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </a>
+            <button 
+              onClick={() => setIsCartOpen(true)}
+              className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300"
+              aria-label="Open cart"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
       

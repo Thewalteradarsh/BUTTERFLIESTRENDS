@@ -132,6 +132,12 @@ export default function CartDrawer({ isOpen, onClose, checkoutUrl }: CartDrawerP
                 onClick={async () => {
                   try {
                     setIsCheckingOut(true);
+                    // If an active checkout URL was passed as a prop, use it directly
+                    if (checkoutUrl) {
+                      window.location.href = checkoutUrl;
+                      return;
+                    }
+                    // Otherwise, construct a new cart via Shopify Storefront API
                     const items = cartItems.map(item => ({ merchandiseId: item.id, quantity: item.quantity }));
                     const url = await createCartFromItems(items);
                     if (url) {
