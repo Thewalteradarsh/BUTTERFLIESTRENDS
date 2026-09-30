@@ -7,18 +7,13 @@ export default function SEOContent() {
         
         {/* Left Side: Elegant Placeholder Image */}
         <div className="w-full md:w-1/2">
-          <div className="w-full aspect-[4/5] bg-[#EAE2D6] rounded-2xl overflow-hidden relative shadow-md">
-             {/* Fallback pattern/color if image fails */}
-             <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                <div className="w-32 h-32 border-4 border-[#BA2461] rounded-full"></div>
-             </div>
-             {/* Replace with actual image when available */}
-             {/* <Image 
-               src="/seo-image-placeholder.jpg" 
-               alt="Women wearing premium cotton kurtis" 
+          <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden relative shadow-md">
+             <Image 
+               src="/cottonkurthi.jpg" 
+               alt="Cotton Kurtis for Women" 
                fill 
-               className="object-cover w-full h-full z-10" 
-             /> */}
+               className="object-cover" 
+             />
           </div>
         </div>
 
