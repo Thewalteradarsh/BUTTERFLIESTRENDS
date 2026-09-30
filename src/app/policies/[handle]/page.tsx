@@ -1,6 +1,5 @@
 import { getShopPolicy } from "@/lib/shopify";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import { notFound } from "next/navigation";
 
 export default async function PolicyPage({ params }: { params: Promise<{ handle: string }> | { handle: string } }) {
@@ -34,8 +33,6 @@ export default async function PolicyPage({ params }: { params: Promise<{ handle:
           dangerouslySetInnerHTML={{ __html: policy.body }} 
         />
       </main>
-
-      <Footer />
     </div>
   );
 }

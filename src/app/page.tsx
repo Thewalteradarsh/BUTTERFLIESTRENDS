@@ -7,7 +7,6 @@ import Header from "@/components/Header";
 import FeatureGrid from "@/components/FeatureGrid";
 import SEOContent from "@/components/SEOContent";
 import FAQ from "@/components/FAQ";
-import Footer from "@/components/Footer";
 import InstagramReels from "@/components/InstagramReels";
 import WhyWeLove from "@/components/WhyWeLove";
 import Testimonials from "@/components/Testimonials";
@@ -76,8 +75,6 @@ export default async function Home() {
         {/* FAQ Section */}
         <FAQ />
       </main>
-
-      <Footer />
     </div>
   );
 }

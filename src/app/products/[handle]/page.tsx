@@ -1,6 +1,5 @@
 import { getShopifyProduct } from "@/lib/shopify";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Image from "next/image";
 import ProductForm from "@/components/ProductForm";
 import { notFound } from "next/navigation";
@@ -43,8 +42,6 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
           <PDPDesktop product={product} images={images} price={price} />
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
