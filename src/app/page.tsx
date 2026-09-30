@@ -1,5 +1,4 @@
 import SEOBlock from "@/components/SEOBlock";
-import BrandStory from "@/components/BrandStory";
 import { getShopifyProducts, getCollectionProducts } from "@/lib/shopify";
 import Hero from "@/components/Hero";
 import ProductGrid from "@/components/ProductGrid";
@@ -76,7 +75,6 @@ export default async function Home() {
 
         {/* FAQ Section */}
         <FAQ />
-        <BrandStory />
       </main>
 
       <Footer />

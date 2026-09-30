@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import ProductForm from "@/components/ProductForm";
+import ProductAccordions from "@/components/ProductAccordions";
 
 export default function PDPDesktop({ product, images, price }: { product: any, images: any[], price: any }) {
   return (
@@ -69,27 +70,14 @@ export default function PDPDesktop({ product, images, price }: { product: any, i
           </div>
         </div>
 
-        {/* Handcraft Disclaimer Box */}
-        <div className="mt-8 p-5 bg-[#faf6f3] border border-[#e8dcd0] rounded-sm">
-          <h4 className="text-lg font-serif text-[#8a5d3b] mb-3">Handcraft Disclaimer</h4>
-          <p className="text-sm text-gray-700 leading-relaxed">
-            Please note that our products are made from cotton and are dyed using natural dyes, which may bleed during the initial few washes or rub against the skin and other light-coloured garments. Additionally, slight variations in hand block-printing and stitching may occur, which are the hallmark of authentic handmade products.
-          </p>
+        <div className="mt-8 flex flex-col gap-4 text-xs font-sans tracking-wide text-[#27272A]/70 uppercase">
+           <p className="flex items-center gap-2"><span className="text-green-600">●</span> In Stock & Ready to Ship</p>
+           <p>Free shipping on prepaid orders</p>
+           <p>7-day easy replacements</p>
         </div>
 
-        {/* Description & Details moved below the form */}
-        <div className="mt-10 pt-8 border-t border-[#EAE2D6]">
-          <h3 className="text-sm font-sans tracking-widest uppercase text-[#27272A] mb-4">Product Details</h3>
-          <div 
-            className="prose prose-base prose-stone text-[#27272A]/80 mb-8 max-w-none font-sans"
-            dangerouslySetInnerHTML={{ __html: product.descriptionHtml || "" }}
-          />
-          <div className="flex flex-col gap-4 text-xs font-sans tracking-wide text-[#27272A]/70 uppercase">
-             <p className="flex items-center gap-2"><span className="text-green-600">●</span> In Stock & Ready to Ship</p>
-             <p>Free shipping on prepaid orders</p>
-             <p>7-day easy replacements</p>
-          </div>
-        </div>
+        {/* Product Accordions (Replaces static description and handcraft box) */}
+        <ProductAccordions product={product} />
       </div>
     </div>
   );

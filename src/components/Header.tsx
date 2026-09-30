@@ -53,7 +53,7 @@ export default function Header() {
           <nav className="flex gap-12 text-[#27272A] font-sans tracking-widest text-xs uppercase">
             <Link href="/" className="hover:text-[#BA2461] transition-colors duration-300">Home</Link>
             <Link href="/#products" className="hover:text-[#BA2461] transition-colors duration-300">Collections</Link>
-            <Link href="/#about" className="hover:text-[#BA2461] transition-colors duration-300">About</Link>
+            <Link href="/about" className="hover:text-[#BA2461] transition-colors duration-300">About</Link>
             <Link href="/contact" className="hover:text-[#BA2461] transition-colors duration-300">Contact</Link>
           </nav>
           <button 
@@ -107,6 +107,16 @@ export default function Header() {
         </div>
       </header>
       
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-[45] bg-[#FDFBF7] pt-32 px-6 flex flex-col gap-6 text-[#27272A] font-sans text-xl uppercase tracking-widest border-t border-neutral-200 overflow-y-auto">
+            <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#BA2461] transition-colors">Home</Link>
+            <Link href="/#products" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#BA2461] transition-colors">Collections</Link>
+            <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#BA2461] transition-colors">About</Link>
+            <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-[#BA2461] transition-colors">Contact</Link>
+        </div>
+      )}
+
       <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} checkoutUrl={checkoutUrl} />
     </>
   );

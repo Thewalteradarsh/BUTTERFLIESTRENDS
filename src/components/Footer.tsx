@@ -6,7 +6,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-gray-900 text-white py-10 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Brand Column */}
         <div className="flex flex-col space-y-4">
           <h2 className="text-xl font-bold tracking-wider uppercase">Butterflies Trends</h2>
@@ -70,6 +70,23 @@ export default function Footer() {
               </Link>
             </li>
           </ul>
+        </div>
+
+        {/* Contact Column */}
+        <div className="flex flex-col space-y-4">
+          <h3 className="text-lg font-semibold uppercase tracking-wider">Contact Us</h3>
+          <ul className="flex flex-col space-y-2 text-sm text-gray-400">
+            <li>Email: support@butterfliestrends.com</li>
+            <li>Phone: +91 12345 67890</li>
+            <li>Address: 123 Fashion Street, Bengaluru, Karnataka, India</li>
+          </ul>
+          
+          <h3 className="text-lg font-semibold uppercase tracking-wider mt-4">Follow Us</h3>
+          <div className="flex space-x-4 text-gray-400 text-sm">
+            <a href="#" className="hover:text-white transition-colors">Instagram</a>
+            <a href="#" className="hover:text-white transition-colors">Facebook</a>
+            <a href="#" className="hover:text-white transition-colors">Twitter</a>
+          </div>
         </div>
       </div>
     </footer>
