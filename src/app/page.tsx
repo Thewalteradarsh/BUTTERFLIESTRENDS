@@ -79,8 +79,5 @@ export default async function Home() {
         <BrandStory />
       </main>
 
-      {/* Footer */}
-      <Footer />
-    </div>
   );
 }

@@ -2,10 +2,10 @@ import React from "react";
 
 export default function BrandStory() {
   return (
-    <section id="about" className="py-24 px-4 bg-white border-t border-[#EAE2D6]">
-      <div className="max-w-3xl mx-auto text-center font-sans text-[#27272A] leading-relaxed">
+    <section id="about" className="relative w-full py-24 px-4 bg-white border-t border-[#EAE2D6]">
+      <div className="relative max-w-3xl mx-auto text-center font-sans text-[#27272A] leading-relaxed">
         <h2 className="text-3xl md:text-5xl font-serif mb-12 text-[#BA2461]">About Us</h2>
-        <div className="space-y-6 text-sm md:text-base">
+        <div className="flex flex-col gap-6 text-sm md:text-base">
           <p>
             Every brand has a beginning. Ours began with a dream, a few carefully chosen garments, and the determination of one woman who believed she could create something of her own. Kavita S, a fashion designer with years of experience in the garment industry, spent much of her career understanding fabrics, patterns, and what makes women feel confident in what they wear. But deep down, she wanted to build something more personal - something that reflected her own taste, creativity, and love for Indian craftsmanship.
           </p>

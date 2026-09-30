@@ -461,3 +461,38 @@ export async function getCart(cartId: string) {
     return res.data?.cart;
 }
 
+export async function getShopPolicy(handle: string) {
+    const query = `
+        query getPolicies {
+            shop {
+                privacyPolicy { title body }
+                termsOfService { title body }
+                refundPolicy { title body }
+                shippingPolicy { title body }
+            }
+        }
+    `;
+    
+    try {
+        const res = await shopifyFetch({ query });
+        const shop = res.data?.shop;
+        if (!shop) return null;
+
+        switch (handle) {
+            case 'privacy-policy':
+                return shop.privacyPolicy;
+            case 'terms-of-service':
+                return shop.termsOfService;
+            case 'refund-policy':
+                return shop.refundPolicy;
+            case 'shipping-policy':
+                return shop.shippingPolicy;
+            default:
+                return null;
+        }
+    } catch (error) {
+        console.error("Error fetching policy:", error);
+        return null;
+    }
+}
+
