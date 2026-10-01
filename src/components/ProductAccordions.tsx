@@ -18,8 +18,23 @@ export default function ProductAccordions({ product }: { product: any }) {
       content: "We offer a 7-day easy exchange policy for all our products. If you are not satisfied with your purchase, you can return it within 7 days of delivery. The product must be unused, unwashed, and in its original condition with all tags attached."
     },
     {
-      title: "Care Details",
-      content: "Hand wash separately in cold water using mild detergent. Do not soak. Dry in shade. Warm iron on reverse. Natural dyes may bleed slightly during the first few washes, which is normal for handcrafted textiles."
+      title: "Care Instructions",
+      isHtml: true,
+      content: `
+        <ul class="list-none space-y-1 mb-4">
+          <li>Gentle hand wash in cold water, inside out</li>
+          <li>Use mild, pH-neutral detergent</li>
+          <li>Avoid bleach & color guards</li>
+          <li>Dry in shade, inside out</li>
+          <li>Iron on low-medium heat</li>
+        </ul>
+        <p class="font-semibold mb-2">Important Notes:</p>
+        <ul class="list-none space-y-1">
+          <li>Color may bleed during initial washes</li>
+          <li>Avoid mixing dark & light colors</li>
+          <li>Wash indigo items separately</li>
+        </ul>
+      `
     }
   ];
 

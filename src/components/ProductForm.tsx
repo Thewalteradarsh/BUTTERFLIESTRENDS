@@ -8,6 +8,7 @@ export default function ProductForm({ product }: { product: any }) {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
   const [isBuyingNow, setIsBuyingNow] = useState(false);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
   // Extract Size option
   const sizeOption = product.options?.find((opt: any) => opt.name.toLowerCase() === "size");
@@ -114,7 +115,6 @@ export default function ProductForm({ product }: { product: any }) {
         <div className="mb-8">
           <div className="flex justify-between items-end mb-4">
             <h3 className="text-sm font-sans tracking-widest uppercase text-[#27272A]">Select Size</h3>
-            <span className="text-xs text-[#27272A]/70 underline cursor-pointer hover:text-[#BA2461]">Size Guide</span>
           </div>
           <div className="flex flex-wrap gap-3 mt-2">
             {sizes.map((size: string) => {
@@ -141,6 +141,14 @@ export default function ProductForm({ product }: { product: any }) {
                 </button>
               );
             })}
+          </div>
+          <div className="mt-3">
+            <button
+              onClick={() => setIsSizeGuideOpen(true)}
+              className="text-xs font-semibold tracking-wider text-[#27272A] underline hover:text-[#BA2461] transition-colors uppercase"
+            >
+              VIEW SIZE GUIDE
+            </button>
           </div>
         </div>
       )}
@@ -172,6 +180,113 @@ export default function ProductForm({ product }: { product: any }) {
       >
         {!selectedVariant ? "Select a Size" : isBuyingNow ? "Processing..." : "Buy It Now"}
       </button>
+
+      {/* Size Guide Modal */}
+      {isSizeGuideOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative">
+            <button 
+              onClick={() => setIsSizeGuideOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors"
+              aria-label="Close Size Guide"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            
+            <div className="p-6 md:p-8 font-sans text-[#27272A]">
+              <h2 className="text-2xl font-serif text-[#BA2461] text-center mb-2 uppercase">Size Guide</h2>
+              <div className="text-center text-sm font-semibold tracking-widest mb-6">
+                <p>WOMEN'S COLLECTION</p>
+                <p className="text-gray-500 text-xs mt-1">MEASUREMENTS IN INCHES</p>
+              </div>
+
+              <div className="overflow-x-auto mb-8">
+                <table className="w-full border-collapse text-sm text-center">
+                  <thead>
+                    <tr className="bg-gray-50 border-b border-gray-200">
+                      <th className="py-3 px-2 font-semibold">SIZE</th>
+                      <th className="py-3 px-2 font-semibold">SHOULDER</th>
+                      <th className="py-3 px-2 font-semibold">CHEST</th>
+                      <th className="py-3 px-2 font-semibold">WAIST</th>
+                      <th className="py-3 px-2 font-semibold">HIP</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="py-3 px-2 font-medium">S</td>
+                      <td className="py-3 px-2">14</td>
+                      <td className="py-3 px-2">36</td>
+                      <td className="py-3 px-2">34</td>
+                      <td className="py-3 px-2">39</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="py-3 px-2 font-medium">M</td>
+                      <td className="py-3 px-2">14.5</td>
+                      <td className="py-3 px-2">38</td>
+                      <td className="py-3 px-2">36</td>
+                      <td className="py-3 px-2">41</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="py-3 px-2 font-medium">L</td>
+                      <td className="py-3 px-2">15</td>
+                      <td className="py-3 px-2">40</td>
+                      <td className="py-3 px-2">38</td>
+                      <td className="py-3 px-2">43</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="py-3 px-2 font-medium">XL</td>
+                      <td className="py-3 px-2">15.5</td>
+                      <td className="py-3 px-2">42</td>
+                      <td className="py-3 px-2">40</td>
+                      <td className="py-3 px-2">45</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="py-3 px-2 font-medium">2XL</td>
+                      <td className="py-3 px-2">16</td>
+                      <td className="py-3 px-2">44</td>
+                      <td className="py-3 px-2">42</td>
+                      <td className="py-3 px-2">47</td>
+                    </tr>
+                    <tr className="hover:bg-gray-50/50">
+                      <td className="py-3 px-2 font-medium">3XL</td>
+                      <td className="py-3 px-2">17</td>
+                      <td className="py-3 px-2">46</td>
+                      <td className="py-3 px-2">44</td>
+                      <td className="py-3 px-2">50</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-sm font-bold tracking-widest uppercase mb-4 border-b pb-2">How to Measure</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="font-semibold block text-gray-800">SHOULDER:</span>
+                    <span className="text-gray-600">Across back from point to point.</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold block text-gray-800">CHEST:</span>
+                    <span className="text-gray-600">Fullest part of your chest.</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold block text-gray-800">WAIST:</span>
+                    <span className="text-gray-600">Around your natural waistline.</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold block text-gray-800">HIP:</span>
+                    <span className="text-gray-600">Fullest part of your hips.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-[#FAF6F3] p-4 rounded-md border border-[#EAE2D6] text-sm text-center font-medium text-[#BA2461]">
+                💡 Between two sizes? We recommend choosing the next size.
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
