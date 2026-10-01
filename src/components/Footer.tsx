@@ -28,7 +28,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/collections" className="hover:text-white transition-colors duration-200">
+              <Link href="/#products" className="hover:text-white transition-colors duration-200">
                 Collections
               </Link>
             </li>
@@ -80,7 +80,7 @@ export default function Footer() {
               Email: <a href="mailto:butterfliestrends.org@gmail.com" className="hover:text-white transition-colors">butterfliestrends.org@gmail.com</a>
             </li>
             <li>
-              Phone: <a href="tel:+917676302578" className="hover:text-white transition-colors">+91 7676302578</a> To Order | 🚚 Pan India Delivery
+              Phone: <a href="tel:+917676302578" className="hover:text-white transition-colors">+91 7676302578</a> | 🚚 Pan India Delivery
             </li>
             <li>Address: 📍 Manyata Tech Park, Bengaluru</li>
           </ul>
@@ -88,8 +88,6 @@ export default function Footer() {
           <h3 className="text-lg font-semibold uppercase tracking-wider mt-4">Follow Us</h3>
           <div className="flex space-x-4 text-gray-400 text-sm">
             <a href="https://www.instagram.com/butterflies_trends?stkn=d29nZ3c3a3Q1am0y" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
-            <a href="#" className="hover:text-white transition-colors">Facebook</a>
-            <a href="#" className="hover:text-white transition-colors">Twitter</a>
           </div>
         </div>
       </div>
