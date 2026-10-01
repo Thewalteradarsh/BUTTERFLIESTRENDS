@@ -73,7 +73,7 @@ export default function PDPDesktop({ product, images, price }: { product: any, i
         <div className="mt-8 flex flex-col gap-4 text-xs font-sans tracking-wide text-[#27272A]/70 uppercase">
            <p className="flex items-center gap-2"><span className="text-green-600">●</span> In Stock & Ready to Ship</p>
            <p>Free shipping on prepaid orders</p>
-           <p>7-day easy replacements</p>
+           <p>7-day easy exchanges</p>
         </div>
 
         {/* Product Accordions (Replaces static description and handcraft box) */}

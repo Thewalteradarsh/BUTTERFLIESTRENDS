@@ -21,8 +21,8 @@ const faqs = [
     answer: "Yes, we offer free shipping on prepaid orders."
   },
   {
-    question: "What is your replacement policy?",
-    answer: "If there is a size or product issue, you can request a replacement within the specified replacement period."
+    question: "What is your exchange policy?",
+    answer: "If there is a size or product issue, you can request an exchange within the specified exchange period."
   },
   {
     question: "Do you deliver across India?",

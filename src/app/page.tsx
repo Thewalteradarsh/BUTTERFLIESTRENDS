@@ -19,7 +19,7 @@ export default async function Home() {
   const features = [
     { icon: <Leaf size={24} />, title: "100% Organic Cotton", subtitle: "Breathable & skin-friendly fabrics made for all-day wear." },
     { icon: <Truck size={24} />, title: "Free Delivery", subtitle: "Free shipping on all prepaid orders." },
-    { icon: <RefreshCcw size={24} />, title: "Easy Replacement", subtitle: "Simple and hassle-free replacement process." },
+    { icon: <RefreshCcw size={24} />, title: "Easy Exchange", subtitle: "Simple and hassle-free exchange process." },
     { icon: <Banknote size={24} />, title: "COD Available", subtitle: "Shop confidently with Cash on Delivery." }
   ];
 

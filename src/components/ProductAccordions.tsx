@@ -15,7 +15,7 @@ export default function ProductAccordions({ product }: { product: any }) {
     },
     {
       title: "Return and Exchange",
-      content: "We offer a 7-day easy replacement policy for all our products. If you are not satisfied with your purchase, you can return it within 7 days of delivery. The product must be unused, unwashed, and in its original condition with all tags attached."
+      content: "We offer a 7-day easy exchange policy for all our products. If you are not satisfied with your purchase, you can return it within 7 days of delivery. The product must be unused, unwashed, and in its original condition with all tags attached."
     },
     {
       title: "Care Details",
