@@ -76,14 +76,18 @@ export default function Footer() {
         <div className="flex flex-col space-y-4">
           <h3 className="text-lg font-semibold uppercase tracking-wider">Contact Us</h3>
           <ul className="flex flex-col space-y-2 text-sm text-gray-400">
-            <li>Email: support@butterfliestrends.com</li>
-            <li>Phone: +91 12345 67890</li>
-            <li>Address: 123 Fashion Street, Bengaluru, Karnataka, India</li>
+            <li>
+              Email: <a href="mailto:butterfliestrends.org@gmail.com" className="hover:text-white transition-colors">butterfliestrends.org@gmail.com</a>
+            </li>
+            <li>
+              Phone: <a href="tel:+917676302578" className="hover:text-white transition-colors">+91 7676302578</a> To Order | 🚚 Pan India Delivery
+            </li>
+            <li>Address: 📍 Manyata Tech Park, Bengaluru</li>
           </ul>
           
           <h3 className="text-lg font-semibold uppercase tracking-wider mt-4">Follow Us</h3>
           <div className="flex space-x-4 text-gray-400 text-sm">
-            <a href="#" className="hover:text-white transition-colors">Instagram</a>
+            <a href="https://www.instagram.com/butterflies_trends?stkn=d29nZ3c3a3Q1am0y" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
             <a href="#" className="hover:text-white transition-colors">Facebook</a>
             <a href="#" className="hover:text-white transition-colors">Twitter</a>
           </div>
