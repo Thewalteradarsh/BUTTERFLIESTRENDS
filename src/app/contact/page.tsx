@@ -34,7 +34,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-[#27272A] mb-1">Phone / WhatsApp</h3>
                     <p className="text-[#27272A]/80 leading-relaxed mb-4">
-                      +91 7676302578 | 🚚 Pan India Delivery
+                      +91 7676302578
                     </p>
                     <a 
                       href="https://wa.me/917676302578" 

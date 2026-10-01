@@ -80,7 +80,7 @@ export default function Footer() {
               Email: <a href="mailto:butterfliestrends.org@gmail.com" className="hover:text-white transition-colors">butterfliestrends.org@gmail.com</a>
             </li>
             <li>
-              Phone: <a href="tel:+917676302578" className="hover:text-white transition-colors">+91 7676302578</a> | 🚚 Pan India Delivery
+              Phone: <a href="tel:+917676302578" className="hover:text-white transition-colors">+91 7676302578</a>
             </li>
             <li>Address: 📍 Manyata Tech Park, Bengaluru</li>
           </ul>
