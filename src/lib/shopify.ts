@@ -173,11 +173,11 @@ export async function getShopifyProduct(handle: string) {
         images: { edges: [{ node: { url: "/hero-kurti.png.png", altText: "Mock Kurti" } }] },
         variants: {
             edges: [
-                { node: { id: "mock-1-S", title: "S", availableForSale: true, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "S" }] } },
-                { node: { id: "mock-1-M", title: "M", availableForSale: true, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "M" }] } },
-                { node: { id: "mock-1-L", title: "L", availableForSale: false, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "L" }] } },
-                { node: { id: "mock-1-XL", title: "XL", availableForSale: true, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "XL" }] } },
-                { node: { id: "mock-1-XXL", title: "XXL", availableForSale: true, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "XXL" }] } }
+                { node: { id: "mock-1-S", title: "S", availableForSale: true, quantityAvailable: 4, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "S" }] } },
+                { node: { id: "mock-1-M", title: "M", availableForSale: true, quantityAvailable: 10, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "M" }] } },
+                { node: { id: "mock-1-L", title: "L", availableForSale: false, quantityAvailable: 0, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "L" }] } },
+                { node: { id: "mock-1-XL", title: "XL", availableForSale: true, quantityAvailable: 2, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "XL" }] } },
+                { node: { id: "mock-1-XXL", title: "XXL", availableForSale: true, quantityAvailable: 20, price: { amount: "1299" }, selectedOptions: [{ name: "Size", value: "XXL" }] } }
             ]
         }
     };
@@ -217,6 +217,7 @@ export async function getShopifyProduct(handle: string) {
               id
               title
               availableForSale
+              quantityAvailable
               price {
                 amount
               }

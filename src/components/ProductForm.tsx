@@ -153,6 +153,19 @@ export default function ProductForm({ product }: { product: any }) {
         </div>
       )}
 
+      {/* Stock Indicator */}
+      {selectedVariant && (
+        <div className="mb-4">
+          {(!selectedVariant.availableForSale || selectedVariant.quantityAvailable === 0) ? (
+            <p className="text-sm font-medium text-red-600">Out of Stock</p>
+          ) : (selectedVariant.quantityAvailable > 0 && selectedVariant.quantityAvailable <= 5) ? (
+            <p className="text-sm font-medium text-orange-600">🔥 Hurry, only {selectedVariant.quantityAvailable} left in stock!</p>
+          ) : (
+            <p className="text-sm font-medium text-green-600">In Stock</p>
+          )}
+        </div>
+      )}
+
       <div className="flex flex-col sm:flex-row gap-4 mb-4">
         <div className="flex items-center border border-[#EAE2D6] rounded-md bg-white h-12 sm:w-32 shrink-0 overflow-hidden">
           <button onClick={decrement} className="flex-1 h-full flex items-center justify-center hover:bg-gray-50 text-xl font-light">-</button>
