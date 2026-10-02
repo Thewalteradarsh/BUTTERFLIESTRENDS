@@ -1,154 +1,82 @@
 "use client";
 
-import { useRef, useEffect } from 'react';
 import { motion } from "framer-motion";
 
 export default function HeroMobile() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const containerRef = useRef<HTMLElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const totalFrames = 66;
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
 
-  useEffect(() => {
-    let loadedCount = 0;
-    for (let i = 1; i <= totalFrames; i++) {
-      const img = new window.Image();
-      img.src = `/hero-fabric_frames/frame_${String(i).padStart(3, '0')}.jpg`;
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === 1) {
-          drawFrame(1);
-        }
-      };
-      imagesRef.current[i] = img;
-    }
-
-    const setCanvasSize = () => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-    };
-
-    const drawFrame = (index: number) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-      const img = imagesRef.current[index];
-      if (!img || !img.complete) return;
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    };
-
-    setCanvasSize();
-    drawFrame(1);
-
-    let ticking = false;
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (!containerRef.current) {
-            ticking = false;
-            return;
-          }
-          
-          const rect = containerRef.current.getBoundingClientRect();
-          const scrollTop = -rect.top;
-          const maxScroll = rect.height - window.innerHeight;
-          let scrollFraction = scrollTop / maxScroll;
-          scrollFraction = Math.max(0, Math.min(1, scrollFraction));
-          
-          const frameIndex = Math.min(
-            totalFrames,
-            Math.max(1, Math.floor(scrollFraction * totalFrames) + 1)
-          );
-          
-          drawFrame(frameIndex);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    const handleResize = () => {
-      setCanvasSize();
-      handleScroll();
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  };
 
   return (
-    <section ref={containerRef} className="relative h-[300vh] w-full bg-[#f2ece4]">
-      <div className="sticky top-0 w-full h-[100dvh] overflow-hidden flex flex-col items-center justify-center">
-        {/* Scroll-Driven Canvas Background */}
-        <canvas 
-          ref={canvasRef} 
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none" 
-        />
+    <section className="relative w-full min-h-[100dvh] bg-[#FDFBF7] flex flex-col pt-24 pb-16 px-6 overflow-hidden">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="flex flex-col items-center text-center w-full max-w-sm mx-auto z-10 flex-grow justify-center"
+      >
+        {/* Image */}
+        <motion.div variants={itemVariants} className="w-full relative aspect-[4/5] mb-8 rounded-2xl overflow-hidden shadow-2xl">
+           <img src="/hero-fabric_frames/frame_066.jpg" alt="Hero Collection" className="w-full h-full object-cover" />
+           <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent pointer-events-none" />
+        </motion.div>
 
-        {/* Mobile Gradient Overlay */}
-        <div className="absolute bottom-0 left-0 w-full h-[60%] bg-gradient-to-t from-[#FDFBF7] via-[#FDFBF7]/80 to-transparent z-0 pointer-events-none" />
+        {/* Eyebrow */}
+        <motion.span variants={itemVariants} className="text-[10px] text-[#27272A]/70 uppercase tracking-[0.2em] font-sans mb-3 font-bold">
+          Fashion For A Brighter You
+        </motion.span>
+        
+        {/* Title */}
+        <motion.h1 variants={itemVariants} className="text-4xl font-serif font-bold mb-4 leading-[1.15] bg-gradient-to-r from-[#BA2461] to-[#951C4D] bg-clip-text text-transparent pb-1 px-2">
+          100% Cotton Kurtis & Ethnic Wear
+        </motion.h1>
 
-        {/* Mobile Content */}
-        <div className="absolute bottom-8 left-4 right-4 z-10 flex flex-col items-center text-center pointer-events-auto">
-          <motion.span 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-[10px] text-[#27272A]/70 uppercase tracking-widest font-sans mb-3 font-semibold"
-          >
-            Fashion For A Brighter You
-          </motion.span>
-          <motion.h1 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-3xl font-serif text-[#BA2461] mb-3 leading-tight drop-shadow-sm px-2"
-          >
-            100% Cotton Kurtis & Ethnic Wear
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-            className="text-sm text-[#27272A] mb-5 font-serif drop-shadow-sm px-2"
-          >
-            Hand Block Prints • Kalamkari • Ajrakh
-          </motion.p>
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.4 }}
-            className="flex flex-row justify-center gap-2 w-full px-2 max-w-sm"
-          >
-            <a 
-              href="#products" 
-              className="flex-1 inline-flex items-center justify-center py-3 px-2 bg-[#BA2461] text-[#FDFBF7] hover:bg-[#951C4D] font-sans tracking-widest text-xs uppercase shadow-lg text-center"
-            >
-              Shop New
-            </a>
-            <a 
-              href="#categories" 
-              className="flex-1 inline-flex items-center justify-center py-3 px-2 bg-transparent border border-[#BA2461] text-[#BA2461] hover:bg-[#BA2461]/5 font-sans tracking-widest text-xs uppercase shadow-sm text-center"
-            >
-              Explore All
-            </a>
-          </motion.div>
-        </div>
-      </div>
+        {/* Subtitle */}
+        <motion.p variants={itemVariants} className="text-[15px] text-[#27272A]/80 mb-8 font-sans leading-relaxed px-4">
+          Experience everyday elegance with our premium hand-block prints, Kalamkari, and Ajrakh collections.
+        </motion.p>
+
+        {/* Buttons */}
+        <motion.div variants={itemVariants} className="flex flex-row justify-center gap-3 w-full px-2">
+          <a href="#products" className="flex-1 py-3.5 bg-[#BA2461] text-white rounded-full font-sans tracking-widest text-[10px] sm:text-xs uppercase shadow-lg shadow-[#BA2461]/20 hover:scale-[1.02] active:scale-95 transition-transform font-bold">
+            Shop New
+          </a>
+          <a href="#categories" className="flex-1 py-3.5 bg-white border border-[#EAE2D6] text-[#BA2461] rounded-full font-sans tracking-widest text-[10px] sm:text-xs uppercase shadow-sm hover:scale-[1.02] active:scale-95 transition-transform font-bold">
+            Explore All
+          </a>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll Down Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none"
+      >
+        <span className="text-[9px] uppercase tracking-[0.2em] text-[#BA2461]/60 mb-2 font-semibold">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#BA2461]/60">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
