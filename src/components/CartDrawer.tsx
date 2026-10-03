@@ -3,36 +3,15 @@
 import { useState } from "react";
 import { createCartFromItems } from "../lib/actions";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "@/context/CartContext";
 
-interface CartDrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  checkoutUrl?: string | null;
-}
-
-interface CartItem {
-  id: string;
-  title: string;
-  size: string;
-  price: number;
-  quantity: number;
-  image: string;
-}
-
-export default function CartDrawer({ isOpen, onClose, checkoutUrl }: CartDrawerProps) {
-  // Using local state to manage the mock cart until a global store (e.g. Zustand/Context) is implemented.
-  const [cartItems, setCartItems] = useState<CartItem[]>([
-    { id: "1", title: "Maroon A-Line Kurti", size: "M", price: 1299, quantity: 1, image: "/hero-kurti.png.png" },
-    { id: "2", title: "Straight Cut Silk", size: "L", price: 1899, quantity: 1, image: "/hero-kurti.png.png" },
-  ]);
+export default function CartDrawer() {
+  const { isCartOpen, closeCart, cartItems, checkoutUrl, removeCartItem } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   const handleUpdateQuantity = (id: string, newQuantity: number) => {
     if (newQuantity < 1) {
-      // Remove item if quantity falls below 1
-      setCartItems(prev => prev.filter(item => item.id !== id));
-    } else {
-      setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity: newQuantity } : item));
+      removeCartItem(id);
     }
   };
 
@@ -40,7 +19,7 @@ export default function CartDrawer({ isOpen, onClose, checkoutUrl }: CartDrawerP
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isCartOpen && (
         <>
           {/* Backdrop */}
           <motion.div
@@ -49,7 +28,7 @@ export default function CartDrawer({ isOpen, onClose, checkoutUrl }: CartDrawerP
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50"
-            onClick={onClose}
+            onClick={closeCart}
           />
 
           {/* Drawer */}
@@ -64,7 +43,7 @@ export default function CartDrawer({ isOpen, onClose, checkoutUrl }: CartDrawerP
             <div className="flex justify-between items-center p-6 border-b border-[#EAE2D6]">
               <h2 className="text-xl font-serif text-[#BA2461]">Your Cart</h2>
               <button 
-                onClick={onClose}
+                onClick={closeCart}
                 className="text-[#27272A]/70 hover:text-[#BA2461] transition-colors p-2"
                 aria-label="Close cart"
               >
@@ -79,7 +58,7 @@ export default function CartDrawer({ isOpen, onClose, checkoutUrl }: CartDrawerP
               {cartItems.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-4 text-[#27272A]/60">
                   <p>Your cart is empty.</p>
-                  <button onClick={onClose} className="px-6 py-2 border border-[#BA2461] text-[#BA2461] hover:bg-[#BA2461] hover:text-[#FDFBF7] transition-colors">
+                  <button onClick={closeCart} className="px-6 py-2 border border-[#BA2461] text-[#BA2461] hover:bg-[#BA2461] hover:text-[#FDFBF7] transition-colors">
                     Continue Shopping
                   </button>
                 </div>

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { createCart, addToCart } from "@/lib/shopify";
+import { createCart, addToCart as apiAddToCart } from "@/lib/shopify";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductForm({ product }: { product: any }) {
+  const { addToCart, openCart } = useCart();
   const [selectedVariant, setSelectedVariant] = useState<any>(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -79,10 +81,8 @@ export default function ProductForm({ product }: { product: any }) {
     if (!selectedVariant) return;
     setLoading(true);
     try {
-      const checkoutUrl = await processCartAction();
-      if (checkoutUrl) {
-        window.location.href = checkoutUrl;
-      }
+      await addToCart(selectedVariant.id, quantity, product);
+      openCart();
     } catch (error) {
       console.error("Shopify API rejection:", error);
       alert("Failed to add to cart. Please try again.");

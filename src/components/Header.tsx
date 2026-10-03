@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CartDrawer from "./CartDrawer";
+import { useCart } from "@/context/CartContext";
 
 export default function Header() {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { openCart } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [checkoutUrl, setCheckoutUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,18 +17,6 @@ export default function Header() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleOpenCart = (e: Event) => {
-      const customEvent = e as CustomEvent;
-      if (customEvent.detail?.checkoutUrl) {
-        setCheckoutUrl(customEvent.detail.checkoutUrl);
-      }
-      setIsCartOpen(true);
-    };
-    window.addEventListener("open-cart", handleOpenCart);
-    return () => window.removeEventListener("open-cart", handleOpenCart);
   }, []);
 
   return (
@@ -67,7 +55,7 @@ export default function Header() {
               </svg>
             </a>
             <button 
-              onClick={() => setIsCartOpen(true)}
+              onClick={openCart}
               className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300"
               aria-label="Open cart"
             >
@@ -117,7 +105,7 @@ export default function Header() {
               </svg>
             </a>
             <button 
-              onClick={() => setIsCartOpen(true)}
+              onClick={openCart}
               className="text-[#27272A] hover:text-[#BA2461] transition-colors duration-300"
               aria-label="Open cart"
             >
@@ -139,7 +127,7 @@ export default function Header() {
         </div>
       )}
 
-      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} checkoutUrl={checkoutUrl} />
+      <CartDrawer />
     </>
   );
 }
