@@ -54,7 +54,7 @@ export default function HeroMobile() {
           <a href="#products" className="flex-1 py-3.5 bg-[#BA2461] text-white rounded-full font-sans tracking-widest text-[10px] sm:text-xs uppercase shadow-lg shadow-[#BA2461]/20 hover:scale-[1.02] active:scale-95 transition-transform font-bold">
             Shop New
           </a>
-          <a href="#categories" className="flex-1 py-3.5 bg-white border border-[#EAE2D6] text-[#BA2461] rounded-full font-sans tracking-widest text-[10px] sm:text-xs uppercase shadow-sm hover:scale-[1.02] active:scale-95 transition-transform font-bold">
+          <a href="/#products" className="flex-1 py-3.5 bg-white border border-[#EAE2D6] text-[#BA2461] rounded-full font-sans tracking-widest text-[10px] sm:text-xs uppercase shadow-sm hover:scale-[1.02] active:scale-95 transition-transform font-bold">
             Explore All
           </a>
         </motion.div>

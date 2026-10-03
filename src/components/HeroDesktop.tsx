@@ -44,7 +44,7 @@ export default function HeroDesktop() {
             <a href="#products" className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#BA2461] text-white font-sans tracking-widest text-xs uppercase font-bold shadow-lg shadow-[#BA2461]/20 hover:scale-105 active:scale-95 transition-transform duration-300">
               Shop New Arrivals
             </a>
-            <a href="#categories" className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white border border-[#EAE2D6] text-[#BA2461] font-sans tracking-widest text-xs uppercase font-bold hover:scale-105 active:scale-95 transition-transform duration-300 shadow-sm">
+            <a href="/#products" className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white border border-[#EAE2D6] text-[#BA2461] font-sans tracking-widest text-xs uppercase font-bold hover:scale-105 active:scale-95 transition-transform duration-300 shadow-sm">
               Explore Collections
             </a>
           </motion.div>
