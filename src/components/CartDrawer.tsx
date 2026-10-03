@@ -108,27 +108,9 @@ export default function CartDrawer() {
               <p className="text-[#27272A]/60 text-xs mb-6 tracking-wide">Shipping & taxes calculated at checkout.</p>
               <button 
                 disabled={cartItems.length === 0 || isCheckingOut}
-                onClick={async () => {
-                  try {
-                    setIsCheckingOut(true);
-                    // If an active checkout URL was passed as a prop, use it directly
-                    if (checkoutUrl) {
-                      window.location.href = checkoutUrl;
-                      return;
-                    }
-                    // Otherwise, construct a new cart via Shopify Storefront API
-                    const items = cartItems.map(item => ({ merchandiseId: item.id, quantity: item.quantity }));
-                    const url = await createCartFromItems(items);
-                    if (url) {
-                      window.location.href = url;
-                    } else {
-                      alert("Checkout URL not returned.");
-                    }
-                  } catch (error) {
-                    console.error("Error creating checkout:", error);
-                    alert("Failed to initiate checkout. Please try again.");
-                  } finally {
-                    setIsCheckingOut(false);
+                onClick={() => {
+                  if (checkoutUrl) {
+                    window.location.href = checkoutUrl;
                   }
                 }}
                 className={`w-full py-4 text-[#FDFBF7] font-medium tracking-wide transition-colors duration-300 ${cartItems.length === 0 || isCheckingOut ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#BA2461] hover:bg-[#951C4D]'}`}
