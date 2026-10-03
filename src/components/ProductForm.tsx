@@ -49,17 +49,8 @@ export default function ProductForm({ product }: { product: any }) {
 
     if (cartId) {
       try {
-        const cart = await addToCart(cartId, [{ merchandiseId: selectedVariant.id, quantity }]);
-        if (cart) {
-          checkoutUrl = cart.checkoutUrl;
-        } else {
-          // Fallback if cart doesn't exist or expired
-          const newCart = await createCart(selectedVariant.id, quantity);
-          if (newCart) {
-            localStorage.setItem("shopify_cart_id", newCart.id);
-            checkoutUrl = newCart.checkoutUrl;
-          }
-        }
+        await addToCart(selectedVariant.id, quantity);
+        openCart();
       } catch (err) {
         const newCart = await createCart(selectedVariant.id, quantity);
         if (newCart) {
