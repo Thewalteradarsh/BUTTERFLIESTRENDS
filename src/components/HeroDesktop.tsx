@@ -1,9 +1,12 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+import { Playfair_Display } from 'next/font/google';
+
+const playfair = Playfair_Display({ subsets: ['latin'], weight: ['400', '500', '600'] });
 
 export default function HeroDesktop() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -11,7 +14,7 @@ export default function HeroDesktop() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
   };
@@ -32,11 +35,11 @@ export default function HeroDesktop() {
             Fashion For A Brighter You
           </motion.span>
           
-          <motion.h1 variants={itemVariants} className="text-5xl lg:text-7xl font-serif font-bold mb-6 leading-[1.1] bg-gradient-to-r from-[#BA2461] to-[#951C4D] bg-clip-text text-transparent pb-2">
+          <motion.h1 variants={itemVariants} className={`${playfair.className} text-4xl md:text-5xl lg:text-[3.5rem] font-medium leading-snug tracking-tight text-[#c2185b] max-w-3xl md:max-w-4xl`}>
             100% Cotton Kurtis & Ethnic Wear for Everyday Comfort
           </motion.h1>
           
-          <motion.p variants={itemVariants} className="text-lg lg:text-xl text-[#27272A]/80 mb-10 font-sans leading-relaxed max-w-xl">
+          <motion.p variants={itemVariants} className="mt-6 text-base md:text-lg text-gray-700 font-light tracking-wide">
             Experience everyday elegance with our premium hand-block prints, Kalamkari, Ajrakh, straight-cut kurtis, and palazzos.
           </motion.p>
           
