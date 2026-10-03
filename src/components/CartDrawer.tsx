@@ -75,19 +75,27 @@ export default function CartDrawer() {
                           <p className="text-xs tracking-widest text-[#27272A]/70 uppercase mt-1">Size: {item.size}</p>
                         </div>
                         <div className="flex justify-between items-end">
-                          <div className="flex items-center gap-3 border border-[#EAE2D6] px-3 py-1">
+                          <div className="flex flex-col items-start gap-2">
+                            <div className="flex items-center gap-3 border border-[#EAE2D6] px-3 py-1">
+                              <button 
+                                onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
+                                className="text-[#27272A]/70 hover:text-[#BA2461] px-1"
+                              >
+                                -
+                              </button>
+                              <span className="text-sm min-w-[1rem] text-center">{item.quantity}</span>
+                              <button 
+                                onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+                                className="text-[#27272A]/70 hover:text-[#BA2461] px-1"
+                              >
+                                +
+                              </button>
+                            </div>
                             <button 
-                              onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
-                              className="text-[#27272A]/70 hover:text-[#BA2461] px-1"
+                              onClick={() => removeCartItem(item.id)}
+                              className="text-[10px] uppercase tracking-wider text-[#27272A]/60 hover:text-[#BA2461] underline underline-offset-2 transition-colors"
                             >
-                              -
-                            </button>
-                            <span className="text-sm min-w-[1rem] text-center">{item.quantity}</span>
-                            <button 
-                              onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
-                              className="text-[#27272A]/70 hover:text-[#BA2461] px-1"
-                            >
-                              +
+                              Remove
                             </button>
                           </div>
                           <p className="font-serif text-[#27272A]">₹{Number(item.price).toLocaleString('en-IN')}</p>
