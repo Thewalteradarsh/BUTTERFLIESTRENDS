@@ -1,6 +1,6 @@
 export async function getShopifyProducts() {
-    const domain = process.env.SHOPIFY_STORE_DOMAIN || process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
-    const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || process.env.NEXT_PUBLIC_SHOPIFY_TOKEN;
+    const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+    const token = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
     if (!domain || !token) {
         console.error("Missing Shopify credentials. Returning fallback data.");
@@ -85,8 +85,8 @@ function getFallbackProducts() {
 }
 
 export async function getShopifyCollection(handle: string) {
-    const domain = process.env.SHOPIFY_STORE_DOMAIN || process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
-    const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || process.env.NEXT_PUBLIC_SHOPIFY_TOKEN;
+    const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+    const token = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
     if (!domain || !token) {
         console.error("Missing Shopify credentials.");
@@ -160,8 +160,8 @@ export async function getShopifyCollection(handle: string) {
 }
 
 export async function getShopifyProduct(handle: string) {
-    const domain = process.env.SHOPIFY_STORE_DOMAIN || process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
-    const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || process.env.NEXT_PUBLIC_SHOPIFY_TOKEN;
+    const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+    const token = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
     const mockProduct = {
         id: "mock-product-1",
@@ -263,8 +263,8 @@ export async function getShopifyProduct(handle: string) {
 }
 
 export async function getCollectionProducts(collectionHandle: string) {
-    const domain = process.env.SHOPIFY_STORE_DOMAIN || process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
-    const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || process.env.NEXT_PUBLIC_SHOPIFY_TOKEN;
+    const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+    const token = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
     if (!domain || !token) {
         console.error("Missing Shopify credentials. Returning fallback data.");
@@ -342,8 +342,8 @@ export async function getCollectionProducts(collectionHandle: string) {
 }
 
 export async function shopifyFetch({ query, variables }: { query: string, variables?: any }) {
-    const domain = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN || process.env.SHOPIFY_STORE_DOMAIN;
-    const token = process.env.NEXT_PUBLIC_SHOPIFY_TOKEN || process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+    const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+    const token = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
     if (!domain || !token) {
         throw new Error("Missing Shopify credentials.");
