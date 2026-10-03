@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { addToCart as apiAddToCart, createCart, getCart } from "@/lib/shopify";
+import { addToCart as apiAddToCart, createCart, getCart, removeFromCart as apiRemoveFromCart } from "@/lib/shopify";
 
 export interface CartItem {
   id: string;
@@ -115,9 +115,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const removeCartItem = (id: string) => {
-    // Optimistic UI removal. Real implementation would call Shopify API.
+  const removeCartItem = async (id: string) => {
+    // Optimistic UI removal.
     setCartItems(prev => prev.filter(item => item.id !== id));
+    
+    if (cartId && !id.startsWith("mock-")) {
+      try {
+        await apiRemoveFromCart(cartId, [id]);
+        await fetchCart(cartId); // Refresh state to ensure accuracy
+      } catch (e) {
+        console.error("Remove Error:", e);
+      }
+    }
   };
 
   const updateCartItem = (id: string, quantity: number) => {

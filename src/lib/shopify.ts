@@ -426,6 +426,29 @@ export async function addToCart(cartId: string, lines: { merchandiseId: string, 
     return res.data?.cartLinesAdd?.cart;
 }
 
+export async function removeFromCart(cartId: string, lineIds: string[]) {
+    const query = `
+        mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+            cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+                cart {
+                    id
+                    checkoutUrl
+                }
+                userErrors {
+                    field
+                    message
+                }
+            }
+        }
+    `;
+    const variables = {
+        cartId,
+        lineIds
+    };
+    const res = await shopifyFetch({ query, variables });
+    return res.data?.cartLinesRemove?.cart;
+}
+
 export async function getCart(cartId: string) {
     const query = `
         query getCart($cartId: ID!) {
