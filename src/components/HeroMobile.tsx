@@ -12,25 +12,52 @@ export default function HeroMobile() {
   
   // Preload images
   const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   
   useEffect(() => {
     const totalFrames = 144;
     const loadedImages: HTMLImageElement[] = new Array(totalFrames);
     let loadedCount = 0;
     
-    for (let i = 1; i <= 144; i++) {
-      const img = new Image();
-      const paddedIndex = i.toString().padStart(3, '0');
-      img.src = `/hero-fabric_frames/ezgif-frame-${paddedIndex}.jpg`;
-      const index = i - 1;
-      img.onload = () => {
-        loadedImages[index] = img;
-        loadedCount++;
-        if (loadedCount === totalFrames) {
-          setImages([...loadedImages]);
+    // Immediate First Frame
+    const firstImg = new Image();
+    firstImg.src = "/hero-fabric_frames/ezgif-frame-001.jpg";
+    firstImg.onload = () => {
+      loadedImages[0] = firstImg;
+      loadedCount++;
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext("2d");
+      if (ctx && canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(firstImg, 0, 0, canvas.width, canvas.height);
+      }
+      
+      // Deferred Preloading
+      const preloadRest = () => {
+        for (let i = 2; i <= totalFrames; i++) {
+          const img = new Image();
+          const paddedIndex = i.toString().padStart(3, '0');
+          img.src = `/hero-fabric_frames/ezgif-frame-${paddedIndex}.jpg`;
+          const index = i - 1;
+          img.onload = () => {
+            loadedImages[index] = img;
+            loadedCount++;
+            if (loadedCount === totalFrames) {
+              setImages([...loadedImages]);
+              setIsLoaded(true);
+            }
+          };
         }
       };
-    }
+
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(preloadRest);
+      } else {
+        setTimeout(preloadRest, 1);
+      }
+    };
   }, []);
 
   // Scroll physics
@@ -43,6 +70,7 @@ export default function HeroMobile() {
 
   // Render loop
   useMotionValueEvent(frameIndex, "change", (latestFrame) => {
+    if (!isLoaded) return;
     const frameNumber = Math.round(latestFrame);
     if (images[frameNumber]) {
        const canvas = canvasRef.current;
