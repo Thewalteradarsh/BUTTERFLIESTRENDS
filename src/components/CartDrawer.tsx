@@ -6,14 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 
 export default function CartDrawer() {
-  const { isCartOpen, closeCart, cartItems, checkoutUrl, removeCartItem } = useCart();
+  const { isCartOpen, closeCart, cartItems, checkoutUrl, removeCartItem, updateCartItem } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
-
-  const handleUpdateQuantity = (id: string, newQuantity: number) => {
-    if (newQuantity < 1) {
-      removeCartItem(id);
-    }
-  };
 
   const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
@@ -78,14 +72,20 @@ export default function CartDrawer() {
                           <div className="flex flex-col items-start gap-2">
                             <div className="flex items-center gap-3 border border-[#EAE2D6] px-3 py-1">
                               <button 
-                                onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
+                                onClick={() => {
+                                  if (item.quantity > 1) {
+                                    updateCartItem(item.id, item.quantity - 1);
+                                  } else {
+                                    removeCartItem(item.id);
+                                  }
+                                }}
                                 className="text-[#27272A]/70 hover:text-[#BA2461] px-1"
                               >
                                 -
                               </button>
                               <span className="text-sm min-w-[1rem] text-center">{item.quantity}</span>
                               <button 
-                                onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
+                                onClick={() => updateCartItem(item.id, item.quantity + 1)}
                                 className="text-[#27272A]/70 hover:text-[#BA2461] px-1"
                               >
                                 +

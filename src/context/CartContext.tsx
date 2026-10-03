@@ -19,6 +19,7 @@ interface CartContextType {
   isCartOpen: boolean;
   addToCart: (variantId: string, quantity: number, product?: any) => Promise<void>;
   removeCartItem: (id: string) => void;
+  updateCartItem: (id: string, quantity: number) => void;
   openCart: () => void;
   closeCart: () => void;
 }
@@ -52,7 +53,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             size: node.merchandise?.title || "Default",
             price: Number(node.merchandise?.price?.amount || 0),
             quantity: node.quantity,
-            image: "/hero-kurti.png.png", 
+            image: node.merchandise?.image?.url,
           };
         }) || [];
         setCartItems(items);
@@ -119,11 +120,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setCartItems(prev => prev.filter(item => item.id !== id));
   };
 
+  const updateCartItem = (id: string, quantity: number) => {
+    setCartItems(prev => prev.map(item => item.id === id ? { ...item, quantity } : item));
+  };
+
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
 
   return (
-    <CartContext.Provider value={{ cartId, cartItems, checkoutUrl, isCartOpen, addToCart, removeCartItem, openCart, closeCart }}>
+    <CartContext.Provider value={{ cartId, cartItems, checkoutUrl, isCartOpen, addToCart, removeCartItem, updateCartItem, openCart, closeCart }}>
       {children}
     </CartContext.Provider>
   );

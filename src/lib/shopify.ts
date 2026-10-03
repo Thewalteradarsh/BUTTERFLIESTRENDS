@@ -441,6 +441,10 @@ export async function getCart(cartId: string) {
                                 ... on ProductVariant {
                                     id
                                     title
+                                    image {
+                                        url
+                                        altText
+                                    }
                                     price {
                                         amount
                                     }
